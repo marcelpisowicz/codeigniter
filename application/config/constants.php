@@ -83,3 +83,6 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+defined('HASH_ITERATIONS')     OR define('HASH_ITERATIONS', 20); // number of iterations pbkdf2
+defined('HASH_LENGTH')         OR define('HASH_LENGTH', 32); // hash length
+defined('SALT_LENGTH')         OR define('SALT_LENGTH', 16); // hash length
