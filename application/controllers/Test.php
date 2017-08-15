@@ -1,5 +1,5 @@
 <?php
-class Test extends CI_Controller {
+class Test extends MY_Controller {
 
     public function index() {
         $this->load->model('user');
