@@ -23,7 +23,7 @@ class InitMigration extends AbstractMigration
 
         $password = "admin";
         $salt = bin2hex(openssl_random_pseudo_bytes(SALT_LENGTH/2));
-        $hash = hash_pbkdf2("sha256", $password, $salt, HASH_ITERATIONS, HASH_LENGTH);
+        $hash = hash_pbkdf2(HASH_ALGORITHM, $password, $salt, HASH_ITERATIONS, HASH_LENGTH);
 
         $singleRow = [
             'username'    => 'admin',

@@ -86,3 +86,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 defined('HASH_ITERATIONS')     OR define('HASH_ITERATIONS', 20); // number of iterations pbkdf2
 defined('HASH_LENGTH')         OR define('HASH_LENGTH', 32); // hash length
 defined('SALT_LENGTH')         OR define('SALT_LENGTH', 16); // hash length
+defined('HASH_ALGORITHM')      OR define('HASH_ALGORITHM', 'sha256'); // hash algorithm
