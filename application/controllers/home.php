@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class home extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,12 +21,11 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 
-
 	    $salt = bin2hex(openssl_random_pseudo_bytes(SALT_LENGTH/2));
 	    var_dump($salt);
 
         $hash = hash_pbkdf2("sha256", "admin", $salt, HASH_ITERATIONS, HASH_LENGTH);
-	    var_dump($hash); die;
+
 		$this->load->view('welcome_message');
 	}
 }

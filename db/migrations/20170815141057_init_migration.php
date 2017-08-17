@@ -1,6 +1,5 @@
 <?php
-defined('BASEPATH') OR define('BASEPATH', TRUE);
-include('application'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'constants.php');
+include('application'.DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'passwords_helper.php');
 use Phinx\Migration\AbstractMigration;
 
 class InitMigration extends AbstractMigration
@@ -22,8 +21,8 @@ class InitMigration extends AbstractMigration
             ->save();
 
         $password = "admin";
-        $salt = bin2hex(openssl_random_pseudo_bytes(SALT_LENGTH/2));
-        $hash = hash_pbkdf2(HASH_ALGORITHM, $password, $salt, HASH_ITERATIONS, HASH_LENGTH);
+        $salt = randomSalt();
+        $hash = passwordHash($password, $salt);
 
         $singleRow = [
             'username'    => 'admin',
