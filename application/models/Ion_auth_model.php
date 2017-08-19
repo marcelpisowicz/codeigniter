@@ -268,7 +268,7 @@ class Ion_auth_model extends CI_Model
 			return FALSE;
 		}
 
-		return password_hash($password, $salt);
+		return hash_password($password, $salt);
 
 		// bcrypt
 //		if ($use_sha1_override === FALSE && $this->hash_method == 'bcrypt')
@@ -879,17 +879,17 @@ class Ion_auth_model extends CI_Model
 
 		// IP Address
 		$ip_address = $this->_prepare_ip($this->input->ip_address());
-		$salt       = $this->store_salt ? $this->salt() : FALSE;
-		$password   = $this->hash_password($password, $salt);
+		$salt       = random_salt();
+		$password   = hash_password($password, $salt);
 
 		// Users table.
 		$data = array(
 		    $this->identity_column   => $identity,
 		    'username'   => $identity,
 		    'password'   => $password,
+		    'salt'       => $salt,
 		    'email'      => $email,
 		    'ip_address' => $ip_address,
-		    'created_on' => time(),
 		    'active'     => ($manual_activation === false ? 1 : 0)
 		);
 
@@ -909,19 +909,19 @@ class Ion_auth_model extends CI_Model
 		$id = $this->db->insert_id($this->tables['users'] . '_id_seq');
 
 		// add in groups array if it doesn't exists and stop adding into default group if default group ids are set
-		if( isset($default_group->id) && empty($groups) )
-		{
-			$groups[] = $default_group->id;
-		}
-
-		if (!empty($groups))
-		{
-			// add to groups
-			foreach ($groups as $group)
-			{
-				$this->add_to_group($group, $id);
-			}
-		}
+//		if( isset($default_group->id) && empty($groups) )
+//		{
+//			$groups[] = $default_group->id;
+//		}
+//
+//		if (!empty($groups))
+//		{
+//			// add to groups
+//			foreach ($groups as $group)
+//			{
+//				$this->add_to_group($group, $id);
+//			}
+//		}
 
 		$this->trigger_events('post_register');
 
@@ -1764,7 +1764,7 @@ class Ion_auth_model extends CI_Model
 
 		$this->trigger_events('extra_where');
 
-		$this->db->update($this->tables['users'], array('last_login' => time()), array('id' => $id));
+		$this->db->update($this->tables['users'], array('last_login' => date('Y-m-d H:i:s')), array('id' => $id));
 
 		return $this->db->affected_rows() == 1;
 	}
