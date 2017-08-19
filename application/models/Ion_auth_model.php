@@ -1214,7 +1214,7 @@ class Ion_auth_model extends CI_Model
 	 **/
 	public function increase_login_attempts($identity) {
 		if ($this->config->item('track_login_attempts', 'ion_auth')) {
-			$data = array('ip_address' => '', 'login' => $identity);
+			$data = array('ip_address' => '', 'login' => $identity, 'time' => time());
 			if ($this->config->item('track_login_ip_address', 'ion_auth')) {
 				$data['ip_address'] = $this->_prepare_ip($this->input->ip_address());
 			}
