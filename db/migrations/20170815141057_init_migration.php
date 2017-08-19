@@ -1,5 +1,6 @@
 <?php
-include('application'.DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'password_helper.php');
+include('application' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'password_helper.php');
+
 use Phinx\Migration\AbstractMigration;
 
 class InitMigration extends AbstractMigration
@@ -16,8 +17,8 @@ class InitMigration extends AbstractMigration
             ->addColumn('salt', 'string', ['limit' => SALT_LENGTH])
             ->addColumn('email', 'string', ['limit' => 100])
             ->addColumn('ip_address', 'string', ['limit' => 16])
-            ->addColumn('first_name', 'string', ['limit' => 30, 'null' => true])
-            ->addColumn('last_name', 'string', ['limit' => 30, 'null' => true])
+//            ->addColumn('first_name', 'string', ['limit' => 30, 'null' => true])
+//            ->addColumn('last_name', 'string', ['limit' => 30, 'null' => true])
             ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated', 'datetime', ['null' => true])
             ->addColumn('last_login', 'datetime', ['null' => true])
@@ -68,8 +69,8 @@ class InitMigration extends AbstractMigration
 
         $singleRow = [
             'ip_address' => '127.0.0.1',
-            'username'    => 'admin',
-            'password'  => $hash,
+            'username' => 'admin',
+            'password' => $hash,
             'salt' => $salt,
             'email' => 'admin@example.com',
             'active' => 1,
