@@ -1,6 +1,5 @@
 <?php
-defined('BASEPATH') OR define('BASEPATH', TRUE);
-include('application'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'constants.php');
+include('application'.DIRECTORY_SEPARATOR.'helpers'.DIRECTORY_SEPARATOR.'password_helper.php');
 use Phinx\Migration\AbstractMigration;
 
 class InitMigration extends AbstractMigration
@@ -14,7 +13,7 @@ class InitMigration extends AbstractMigration
         $users = $this->table('users');
         $users->addColumn('username', 'string', ['limit' => 20])
             ->addColumn('password', 'string', ['limit' => HASH_LENGTH])
-            ->addColumn('password_salt', 'string', ['limit' => SALT_LENGTH])
+            ->addColumn('salt', 'string', ['limit' => SALT_LENGTH])
             ->addColumn('email', 'string', ['limit' => 100])
             ->addColumn('ip_address', 'string', ['limit' => 16])
             ->addColumn('first_name', 'string', ['limit' => 30, 'null' => true])
@@ -64,14 +63,14 @@ class InitMigration extends AbstractMigration
         $this->insert('groups', $rows);
 
         $password = "admin";
-        $salt = bin2hex(openssl_random_pseudo_bytes(SALT_LENGTH/2));
-        $hash = hash_pbkdf2(HASH_ALGORITHM, $password, $salt, HASH_ITERATIONS, HASH_LENGTH);
+        $salt = random_salt();
+        $hash = hash_password($password, $salt);
 
         $singleRow = [
             'ip_address' => '127.0.0.1',
             'username'    => 'admin',
             'password'  => $hash,
-            'password_salt' => $salt,
+            'salt' => $salt,
             'email' => 'admin@example.com',
             'active' => 1,
             'admin' => 1

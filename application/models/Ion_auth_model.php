@@ -168,6 +168,7 @@ class Ion_auth_model extends CI_Model
 		$this->config->load('ion_auth', TRUE);
 		$this->load->helper('cookie');
 		$this->load->helper('date');
+        $this->load->helper('password_helper');
 		$this->lang->load('ion_auth');
 
 		// initialize db tables data
@@ -267,22 +268,24 @@ class Ion_auth_model extends CI_Model
 			return FALSE;
 		}
 
+		return password_hash($password, $salt);
+
 		// bcrypt
-		if ($use_sha1_override === FALSE && $this->hash_method == 'bcrypt')
-		{
-			return $this->bcrypt->hash($password);
-		}
-
-
-		if ($this->store_salt && $salt)
-		{
-			return  sha1($password . $salt);
-		}
-		else
-		{
-			$salt = $this->salt();
-			return  $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
-		}
+//		if ($use_sha1_override === FALSE && $this->hash_method == 'bcrypt')
+//		{
+//			return $this->bcrypt->hash($password);
+//		}
+//
+//
+//		if ($this->store_salt && $salt)
+//		{
+//			return  sha1($password . $salt);
+//		}
+//		else
+//		{
+//			$salt = $this->salt();
+//			return  $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
+//		}
 	}
 
 	/**
@@ -307,44 +310,15 @@ class Ion_auth_model extends CI_Model
 		                  ->order_by('id', 'desc')
 		                  ->get($this->tables['users']);
 
-		$hash_password_db = $query->row();
+		$user = $query->row();
 
 		if ($query->num_rows() !== 1)
 		{
 			return FALSE;
 		}
 
-		// bcrypt
-		if ($use_sha1_override === FALSE && $this->hash_method == 'bcrypt')
-		{
-			if ($this->bcrypt->verify($password,$hash_password_db->password))
-			{
-				return TRUE;
-			}
-
-			return FALSE;
-		}
-
-		// sha1
-		if ($this->store_salt)
-		{
-			$db_password = sha1($password . $hash_password_db->salt);
-		}
-		else
-		{
-			$salt = substr($hash_password_db->password, 0, $this->salt_length);
-
-			$db_password =  $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
-		}
-
-		if($db_password == $hash_password_db->password)
-		{
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+		$hash = hash_password($password, $user->salt);
+		return $hash === $user->password;
 	}
 
 	/**
@@ -972,7 +946,7 @@ class Ion_auth_model extends CI_Model
 
 		$this->trigger_events('extra_where');
 
-		$query = $this->db->select($this->identity_column . ', email, id, password, active, last_login')
+		$query = $this->db->select($this->identity_column . ', email, salt, id, password, active, last_login')
 		                  ->where($this->identity_column, $identity)
 		                  ->limit(1)
 		    			  ->order_by('id', 'desc')
@@ -993,9 +967,9 @@ class Ion_auth_model extends CI_Model
 		{
 			$user = $query->row();
 
-			$password = $this->hash_password_db($user->id, $password);
+			$hash = hash_password($password, $user->salt);
 
-			if ($password === TRUE)
+			if ($hash === $user->password)
 			{
 				if ($user->active == 0)
 				{
