@@ -13,6 +13,9 @@ class Register extends MY_Controller
         $this->form_validation->set_rules('confirm_password', 'Confirm password', 'trim|matches[password]|required');
 
         if ($this->form_validation->run() === false) {
+            $this->data['username'] = $this->input->post('username');
+            $this->data['email'] = $this->input->post('email');
+            $this->data['password'] = $this->input->post('password');
             $this->load->helper('form');
             $this->render('register/index_view');
         } else {

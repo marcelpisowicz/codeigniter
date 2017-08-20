@@ -1,24 +1,53 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<div class="container">
-    <?php
-    echo isset($_SESSION['auth_message']) ? $_SESSION['auth_message'] : false;
-    ?>
-    <h1>Register</h1>
-    <?php
-    echo form_open();
-    echo form_label('Username:','username').'<br />';
-    echo form_error('username');
-    echo form_input('username',set_value('username')).'<br />';
-    echo form_label('Email:','email').'<br />';
-    echo form_error('email');
-    echo form_input('email',set_value('email')).'<br />';
-    echo form_label('Password:', 'password').'<br />';
-    echo form_error('password');
-    echo form_password('password').'<br />';
-    echo form_label('Confirm password:', 'confirm_password').'<br />';
-    echo form_error('confirm_password');
-    echo form_password('confirm_password').'<br /><br />';
-    echo form_submit('register','Register');
-    echo form_close();
-    ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<link rel="stylesheet" href="<?php echo base_url('assets/css/login.css') ?>"/>
+<body class="main">
+<div class="login-center">
+    <?= form_open(); ?>
+    <div class="front signin_form">
+        <p class="login_text">Register new account</p>
+
+        <div class="input-group">
+            <?= form_input('username', $username, ['class' => 'form-control'.(empty(form_error('username')) ? '' : ' error-form'), 'placeholder' => 'username']) ?>
+            <span class="input-group-addon<?= empty(form_error('username')) ? '' : ' error-form' ?>"><i class="glyphicon glyphicon-user"></i></span>
+        </div>
+        <div class="input-group">
+            <?= form_input('email', $email, ['class' => 'form-control'.(empty(form_error('email')) ? '' : ' error-form'), 'placeholder' => 'email']) ?>
+            <span class="input-group-addon<?= empty(form_error('email')) ? '' : ' error-form' ?>"><i class="glyphicon glyphicon-envelope"></i></span>
+        </div>
+        <div class="input-group">
+            <?= form_password('password', $password, ['id' => 'password', 'class' => 'form-control'.(empty(form_error('password')) ? '' : ' error-form'), 'placeholder' => 'password']) ?>
+            <span class="input-group-addon<?= empty(form_error('password')) ? '' : ' error-form' ?>"><i class="glyphicon glyphicon-lock"></i></span>
+        </div>
+        <div class="input-group">
+            <?= form_password('confirm_password', '', ['id' => 'confirm_password', 'class' => 'form-control'.(empty(form_error('confirm_password')) ? '' : ' error-form'), 'placeholder' => 'confirm password']) ?>
+            <span class="input-group-addon<?= empty(form_error('confirm_password')) ? '' : ' error-form' ?>"><i class="glyphicon glyphicon-remove"></i></span>
+        </div>
+
+        <div class="form-group sign-btn">
+            <input type="submit" class="btn" value="Register">
+        </div>
+
+        <div class="form-group">
+            <p><a href="/user/login" >Sign in</a></p>
+        </div>
+
+    </div>
 </div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#confirm_password, #password').keyup(function(){
+            var confirm = $('#confirm_password');
+            if($('#password').val() === confirm.val() && confirm.val()) {
+                $('.glyphicon-remove').removeClass('glyphicon-remove').addClass('glyphicon-ok');
+            } else {
+                $('.glyphicon-ok').removeClass('glyphicon-ok').addClass('glyphicon-remove');
+            }
+        });
+
+        $('.form-control').focus(function() {
+            $(this).removeClass('error-form');
+            $(this).closest('.input-group').find('.input-group-addon').removeClass('error-form');
+        });
+    });
+</script>

@@ -136,9 +136,20 @@ body {
 
 .checkbox label {
     float: right;
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 .glyphicon {
     color: rgba(245, 245, 245, 0.5);
+}
+
+.error-form {
+    border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.focus-input {
+    border-color: #1b5a7c;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(24, 204, 162, 0.6);
+    outline: 0 none;
+    background: rgba(0, 0, 0, 0.2);
 }

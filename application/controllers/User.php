@@ -22,6 +22,8 @@ class User extends MY_Controller
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'required');
         if ($this->form_validation->run() === FALSE) {
+            $this->data['username'] = $this->input->post('username');
+            $this->data['wrong_password'] = true;
             $this->load->helper('form');
             $this->render('user/login_view');
         } else {
@@ -31,7 +33,9 @@ class User extends MY_Controller
             } else {
                 $_SESSION['auth_message'] = $this->ion_auth->errors();
                 $this->session->mark_as_flash('auth_message');
-                redirect('user/login');
+                $this->data['username'] = $this->input->post('username');
+                $this->data['wrong_password'] = true;
+                $this->render('user/login_view');
             }
         }
     }
