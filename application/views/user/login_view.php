@@ -20,7 +20,7 @@
             <div class="checkbox">
                 <label style="font-size: 16px">
                     <?= form_checkbox('remember', '1', false) ?>
-                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
                     <span style="font-size: 16px;">Remember me</span>
                 </label>
             </div>
