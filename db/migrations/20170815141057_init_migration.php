@@ -13,12 +13,10 @@ class InitMigration extends AbstractMigration
 
         $users = $this->table('users');
         $users->addColumn('username', 'string', ['limit' => 20])
-            ->addColumn('password', 'string', ['limit' => HASH_LENGTH])
-            ->addColumn('salt', 'string', ['limit' => SALT_LENGTH])
+            ->addColumn('password', 'string', ['limit' => 32])
+            ->addColumn('salt', 'string', ['limit' => 16])
             ->addColumn('email', 'string', ['limit' => 100])
             ->addColumn('ip_address', 'string', ['limit' => 16])
-//            ->addColumn('first_name', 'string', ['limit' => 30, 'null' => true])
-//            ->addColumn('last_name', 'string', ['limit' => 30, 'null' => true])
             ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated', 'datetime', ['null' => true])
             ->addColumn('last_login', 'datetime', ['null' => true])

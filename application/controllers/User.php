@@ -21,7 +21,10 @@ class User extends MY_Controller
         $this->load->library('form_validation');
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() === FALSE) {
+
+        if($this->ion_auth->logged_in()) {
+            redirect('dashboard');
+        } else if ($this->form_validation->run() === FALSE) {
             $this->data['username'] = $this->input->post('username');
             $this->data['wrong_password'] = true;
             $this->load->helper('form');
