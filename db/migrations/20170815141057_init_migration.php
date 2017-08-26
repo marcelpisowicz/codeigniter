@@ -1,5 +1,4 @@
 <?php
-include('application' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'password_helper.php');
 
 use Phinx\Migration\AbstractMigration;
 
@@ -61,15 +60,11 @@ class InitMigration extends AbstractMigration
 
         $this->insert('groups', $rows);
 
-        $password = "admin";
-        $salt = random_salt();
-        $hash = hash_password($password, $salt);
-
         $singleRow = [
             'ip_address' => '127.0.0.1',
             'username' => 'admin',
-            'password' => $hash,
-            'salt' => $salt,
+            'password' => 'ecc55965a1ede2c9e2a51dc19c51ced0',
+            'salt' => '4eb78f2331b82b29',
             'email' => 'admin@example.com',
             'active' => 1,
             'admin' => 1
