@@ -28,7 +28,7 @@ class Register extends MY_Controller
             if ($this->ion_auth->register($username, $password, $email)) {
                 $_SESSION['auth_message'] = 'The account has been created. You may now login.';
                 $this->session->mark_as_flash('auth_message');
-                redirect('user/login');
+                redirect('login');
             } else {
                 $_SESSION['auth_message'] = $this->ion_auth->errors();
                 $this->session->mark_as_flash('auth_message');

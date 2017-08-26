@@ -3,8 +3,6 @@
 /* CSS Document */
 
 body {
-    width:100px;
-    height:100px;
     background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Chrome 10+, Saf5.1+ */
     background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
     background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
@@ -13,9 +11,13 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
+ul.navbar-nav li {
+    background: linear-gradient(180deg, #5de2d0 0%, #3A6073 100%);
+}
+
 .login-center {
     width: 400px;
-    height: 500px;
+    height: 350px;
     position: absolute;
     top:0;
     bottom: 0;
