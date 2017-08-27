@@ -29,7 +29,6 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"
                        data-toggle="dropdown"> Learn
-                        <b class="caret"> </b>
                         <ul class="dropdown-menu">
                             <li class="dropdown-header">Example</li>
                             <li><a href="#"> c++</a></li>
@@ -39,8 +38,9 @@
                             <li><a href="#"> java</a></li>
                         </ul>
                 </li>
+                <li><?php echo anchor('logout', 'Logout'); ?></li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container"><?php echo anchor('logout', 'Logout'); ?></div>
+<div class="nav-margin"></div>
