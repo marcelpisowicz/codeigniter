@@ -19,6 +19,8 @@
 }
 
 #main_nav li {
+    text-shadow: black 2px 2px 3px;
+    color: whitesmoke !important;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
 }
