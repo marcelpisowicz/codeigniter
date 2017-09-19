@@ -6,13 +6,14 @@ class Home extends Auth_Controller
 
     public function index()
     {
-//        $query = $this->db->query('SELECT * FROM drones');
-//
-//        $this->table->set_heading('ID code', 'model', 'active');
+        $orm = new Drone();
+        $drones = $orm->all();
 
-//        $this->load->model('login_model');
+        if($orm->has_result()) {
+            $this->data['drones'] = $drones;
+        }
 
-        $this->data['drones'] = Drone::get_drone_list();
+        $this->data['drones'] = $orm->all();
 
         $this->render('home/index_view');
 
