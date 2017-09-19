@@ -1,10 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class Drone extends CI_Model
-{
-    public static function get_drone_list() {
+use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-        
+class Drone extends Eloquent {
 
-    }
+    protected $table = "drones"; // table name
 }
