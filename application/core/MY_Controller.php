@@ -12,6 +12,7 @@ class MY_Controller extends CI_Controller
         $this->data['page_description'] = 'CI_App';
         $this->data['before_closing_head'] = '';
         $this->data['before_closing_body'] = '';
+        $this->table->set_template(['table_open'  => '<table class="datatable">']);
     }
 
     protected function render($the_view = null, $template = 'public_master')

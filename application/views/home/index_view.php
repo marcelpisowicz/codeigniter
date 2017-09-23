@@ -1,9 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<div class="container">Hello from dashboard...
-    <?php var_dump($drones); ?>
-    .<br>
-    .<br>
-    .<br>
+<div class="content">
+    <?= $table ?>
     .<br>
     .<br>
     .<br>
