@@ -50,61 +50,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class CI_Table {
 
-	/**
-	 * Data for table rows
-	 *
-	 * @var array
-	 */
-	public $rows		= array();
-
-	/**
-	 * Data for table heading
-	 *
-	 * @var array
-	 */
-	public $heading		= array();
-
-	/**
-	 * Whether or not to automatically create the table header
-	 *
-	 * @var bool
-	 */
-	public $auto_heading	= TRUE;
-
-	/**
-	 * Table caption
-	 *
-	 * @var string
-	 */
-	public $caption		= NULL;
-
-	/**
-	 * Table layout template
-	 *
-	 * @var array
-	 */
-	public $template	= NULL;
-
-	/**
-	 * Newline setting
-	 *
-	 * @var string
-	 */
-	public $newline		= "\n";
-
-	/**
-	 * Contents of empty cells
-	 *
-	 * @var string
-	 */
-	public $empty_cells	= '';
-
-	/**
-	 * Callback for custom table layout
-	 *
-	 * @var function
-	 */
-	public $function	= NULL;
+	public $rows		    = [];
+	public $heading		    = [];
+	public $auto_heading	= true;
+	public $caption		    = null;
+	public $template	    = null;
+	public $newline		    = "\n";
+	public $empty_cells	    = '';
+    private $actions        = [];
+    public $function	    = null;
 
 	/**
 	 * Set the template from the table config file if it exists
@@ -157,6 +111,21 @@ class CI_Table {
 		$this->heading = $this->_prep_args(func_get_args());
 		return $this;
 	}
+
+
+    public function add_action($name, $url, $icon, $param = 'id', $style = null)
+    {
+        $this->heading['Actions']['data'] = 'actions';
+
+        $this->actions [] = [
+            'name' => $name,
+            'url' => $url,
+            'icon' => $icon,
+            'param' => $param,
+            'style' => $style
+        ];
+
+    }
 
 	// --------------------------------------------------------------------
 
@@ -358,6 +327,7 @@ class CI_Table {
 			$out .= $this->template['tbody_open'].$this->newline;
 
 			$i = 1;
+			$headings = array_values(array_column($this->heading, 'data'));
 			foreach ($this->rows as $row)
 			{
 				if ( ! is_array($row))
@@ -369,9 +339,14 @@ class CI_Table {
 				$name = fmod($i++, 2) ? '' : 'alt_';
 
 				$out .= $this->template['row_'.$name.'start'].$this->newline;
+                $temp = null;
 
-				foreach ($row as $cell)
+				foreach ($row as $cell_key => $cell)
 				{
+				    if (!in_array($cell_key, $headings)) {
+                        continue;
+                    }
+
 					$temp = $this->template['cell_'.$name.'start'];
 
 					foreach ($cell as $key => $val)
@@ -400,6 +375,17 @@ class CI_Table {
 
 					$out .= $this->template['cell_'.$name.'end'];
 				}
+
+                if(!empty($this->actions)) {
+                    $out .= $temp;
+
+                    foreach($this->actions as $action) {
+                        $url = $action['url'].'/'.$row[$action['param']]['data'];
+                        $out .= '<a href="'.$url.'"><img src="'.$action['icon'].'" class="action_button '.$action['name'].'" style="'.$action['style'].'"></a>';
+                    }
+
+                    $out .= $this->template['cell_'.$name.'end'];
+                }
 
 				$out .= $this->template['row_'.$name.'end'].$this->newline;
 			}
