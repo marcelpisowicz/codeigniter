@@ -377,7 +377,7 @@ class CI_Table {
 				}
 
                 if(!empty($this->actions)) {
-                    $out .= $temp;
+                    $out .= '<td style="width: '.(count($this->actions)*30).'px">';
 
                     foreach($this->actions as $action) {
                         $url = $action['url'].'/'.$row[$action['param']]['data'];

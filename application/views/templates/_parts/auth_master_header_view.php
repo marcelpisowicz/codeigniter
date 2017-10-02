@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title><?php echo $page_title; ?></title>
-    <meta name="description" value="<?php echo $page_description; ?>"/>
+    <title><?= $page_title; ?></title>
+    <meta name="description" value="<?= $page_description; ?>"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <?php echo $before_closing_head; ?>
+    <?= $before_closing_head; ?>
 </head>
 <body>
 <nav id="main_nav" class="navbar-inverse">
@@ -20,7 +20,7 @@
             <span class="icon-bar"> </span>
         </button>
 
-        <a class="navbar-brand" href="#">Bootsnipp</a>
+        <a class="navbar-brand" href="#">dr.One</a>
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -38,7 +38,7 @@
                             <li><a href="#"> java</a></li>
                         </ul>
                 </li>
-                <li><?php echo anchor('logout', 'Logout'); ?></li>
+                <li><?= anchor('logout', 'Logout'); ?></li>
             </ul>
         </div>
     </div>
