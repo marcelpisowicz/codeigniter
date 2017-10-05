@@ -38,6 +38,7 @@ class Auth_Controller extends MY_Controller
         parent::__construct();
         $this->load->library('ion_auth');
         if ($this->ion_auth->logged_in() === false) {
+            $this->session->set_userdata('url', uri_string());
             redirect('login');
         }
     }
