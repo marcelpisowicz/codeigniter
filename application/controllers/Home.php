@@ -9,11 +9,11 @@ class Home extends Auth_Controller
         $drones = Drone::all()->toArray();
         $this->data['drones'] = $drones;
         $this->table->set_heading(['id_code', 'model']);
-        $this->table->add_action('delete', '/home/delete', '/assets/icons/gps.png');
-        $this->table->add_action('delete', '/home/delete', '/assets/icons/location.png');
-        $this->table->add_action('delete', '/home/delete', '/assets/icons/fullscreen.png');
-        $this->table->add_action('delete', '/home/delete', '/assets/icons/document.png');
-        $this->table->add_action('delete', '/home/delete', '/assets/icons/analyze.png');
+        $this->table->add_action('delete', '/home/gps', '/assets/icons/gps.png');
+        $this->table->add_action('delete', '/home/location', '/assets/icons/location.png');
+        $this->table->add_action('delete', '/streaming/index', '/assets/icons/fullscreen.png', true);
+        $this->table->add_action('delete', '/home/document', '/assets/icons/document.png');
+        $this->table->add_action('delete', '/home/analyze', '/assets/icons/analyze.png');
         $this->table->add_action('delete', '/home/delete', '/assets/icons/trash.png');
 
         $this->data['table'] = $this->table->generate($drones);

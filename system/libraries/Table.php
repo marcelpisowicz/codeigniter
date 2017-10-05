@@ -113,7 +113,7 @@ class CI_Table {
 	}
 
 
-    public function add_action($name, $url, $icon, $param = 'id', $style = null)
+    public function add_action($name, $url, $icon, $new_window = false, $param = 'id', $style = null)
     {
         $this->heading['Actions']['data'] = 'actions';
 
@@ -122,7 +122,8 @@ class CI_Table {
             'url' => $url,
             'icon' => $icon,
             'param' => $param,
-            'style' => $style
+            'style' => $style,
+            'new_window' => $new_window
         ];
 
     }
@@ -381,7 +382,8 @@ class CI_Table {
 
                     foreach($this->actions as $action) {
                         $url = $action['url'].'/'.$row[$action['param']]['data'];
-                        $out .= '<a href="'.$url.'"><img src="'.$action['icon'].'" class="action_button '.$action['name'].'" style="'.$action['style'].'"></a>';
+                        $target = $action['new_window'] ? 'onclick="window.open(\''.$url.'\', \'newwindow\', \'width=640,height=480\');" ' : 'href="'.$url.'"';
+                        $out .= '<a '.$target.'><img src="'.$action['icon'].'" class="action_button '.$action['name'].'" style="'.$action['style'].'"></a>';
                     }
 
                     $out .= $this->template['cell_'.$name.'end'];
