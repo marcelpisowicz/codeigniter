@@ -7,18 +7,17 @@
 
     <link rel="stylesheet" href="<?= base_url('assets/css/flowplayer/skin.css') ?>"/>
     <script src="<?= base_url('assets/js/flowplayer.min.js') ?>"></script>
-<!--    <script src="--><?//= base_url('assets/js/flowplayer.hlsjs.light.min.js') ?><!--"></script>-->
-    <script src="<?= base_url('assets/js/flowplayer.hlsjs.js') ?>"></script>
+    <script src="<?= base_url('assets/js/flowplayer.hlsjs.light.min.js') ?>"></script>
 
 </head>
 
 <body>
 
-<div data-live="true" data-ratio="0.5625" data-share="false" class="flowplayer">
+<div data-live="true" data-share="false" class="flowplayer" style="width:100%; height: 100%">
 
     <video autoplay data-title="Live stream">
         <source type="application/x-mpegurl"
-                src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">
+                src="<?= $source ?>">
     </video>
 
 </div>
