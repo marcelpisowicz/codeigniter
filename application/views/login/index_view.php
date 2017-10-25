@@ -16,12 +16,11 @@
         </div>
         <div class="form-group sign-btn">
             <input type="submit" class="btn" value="Log in">
-
             <div class="checkbox">
-                <label style="font-size: 16px">
-                    <?= form_checkbox('remember', '1', false) ?>
+                <label class="checkbox_label">
+                    <input type="checkbox" name="remember">
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                    <span style="font-size: 16px;">Remember me</span>
+                    <span class="checkbox_label">Remember me</span>
                 </label>
             </div>
         </div>

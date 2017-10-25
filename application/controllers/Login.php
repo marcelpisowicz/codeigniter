@@ -22,7 +22,6 @@ class Login extends MY_Controller
         } else if ($this->form_validation->run() === FALSE) {
             $this->data['username'] = $this->input->post('username');
             $this->data['wrong_password'] = true;
-            $this->load->helper('form');
             $this->render('login/index_view');
         } else {
             $remember = (bool)$this->input->post('remember');

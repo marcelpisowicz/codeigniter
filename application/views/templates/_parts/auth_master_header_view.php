@@ -20,7 +20,7 @@
             <span class="icon-bar"> </span>
         </button>
 
-        <a class="navbar-brand" href="#">dr.One</a>
+        <a class="navbar-brand" href="/">dr.One</a>
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
