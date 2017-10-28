@@ -44,6 +44,7 @@ class Home extends Auth_Controller
         $drone = Drone::findOrNew($drone_id);
         $drone->id_code = $post['id_code'];
         $drone->model = $post['model'];
+        $drone->stream_source = $post['stream_source'];
         $drone->active = (int)isset($post['active']);
         $drone->save();
         $drone_id = $drone->getKey();

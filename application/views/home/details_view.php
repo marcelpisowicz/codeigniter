@@ -18,6 +18,10 @@
         <td><?= form_input('model', $drone['model']); ?></td>
     </tr>
     <tr>
+        <td>Źródło streama</td>
+        <td><?= form_input('stream_source', $drone['stream_source']); ?></td>
+    </tr>
+    <tr>
         <td>Aktywny</td>
         <td>
             <?= form_checkbox('active', $drone['active']); ?>
