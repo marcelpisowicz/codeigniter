@@ -9,12 +9,15 @@ class Home extends Auth_Controller
         $drones = Drone::all()->toArray();
         $this->data['drones'] = $drones;
         $this->table->set_heading(['id_code', 'model']);
-        $this->table->add_action('delete', '/home/gps', '/assets/icons/gps.png');
-        $this->table->add_action('delete', '/home/location', '/assets/icons/location.png');
-        $this->table->add_action('delete', '/streaming/index', '/assets/icons/fullscreen.png', [900, 450]);
-        $this->table->add_action('details', '/home/details', '/assets/icons/document.png');
-        $this->table->add_action('delete', '/home/analyze', '/assets/icons/analyze.png');
-        $this->table->add_action('delete', '/home/delete', '/assets/icons/trash.png');
+//        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
+//        $this->table->add_action('/home/location', '/assets/icons/location.png');
+        $this->table->add_action('/streaming/index', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
+        $this->table->add_action('/home/details', '/assets/icons/document.png', 'Details');
+//        $this->table->add_action('/home/analyze', '/assets/icons/analyze.png');
+//        $this->table->add_action('/home/delete', '/assets/icons/trash.png');
+
+        $this->add_menu('/home/details', '/assets/icons/new.png', 'New');
+        $this->add_menu('#', '/assets/icons/settings.png', 'Settings');
 
         $this->data['table'] = $this->table->generate($drones);
 
@@ -23,9 +26,27 @@ class Home extends Auth_Controller
 
     public function details($id = null)
     {
-        $drone = Drone::find($id)->toArray();
+        $drone = Drone::find($id);
 
         $this->data['drone'] = $drone;
+        $this->data['id'] = $id;
+
+        $this->add_menu('/', '/assets/icons/return.png', 'Return');
+        $this->add_save();
+
         $this->render('home/details_view');
+    }
+
+    public function save()
+    {
+        $drone_id = (int)$this->input->post('id');
+        $post = $this->input->post();
+        $drone = Drone::findOrNew($drone_id);
+        $drone->id_code = $post['id_code'];
+        $drone->model = $post['model'];
+        $drone->active = (int)isset($post['active']);
+        $drone->save();
+        $drone_id = $drone->getKey();
+        redirect('home/details/'.$drone_id);
     }
 }

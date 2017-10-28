@@ -63,3 +63,7 @@ ul.navbar-nav li {
     float: left;
     margin-right: .5em;
 }
+
+input[type=text] {
+    background: rgba(0, 0, 0, 0.1);
+}

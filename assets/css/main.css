@@ -34,9 +34,14 @@ body {
 }
 
 .action_button {
+    opacity: 0.7;
     margin-right: 5px;
     height: 21px;
     width: auto;
+}
+
+.action_button:hover {
+    opacity: 1;
 }
 
 .table_actions_part {
@@ -103,7 +108,7 @@ body {
     cursor: pointer;
 }
 
-.content {
+#content {
     width: 100%;
     padding-left: 80px;
     padding-right: 80px;

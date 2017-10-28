@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MY_Controller extends CI_Controller
 {
     protected $data = [];
+    protected $menu = [];
 
     function __construct()
     {
@@ -17,6 +18,7 @@ class MY_Controller extends CI_Controller
 
     protected function render($the_view = null, $template = 'public_master')
     {
+        $this->data['menu'] = $this->render_menu();
         if ($template == 'json' || $this->input->is_ajax_request()) {
             header('Content-Type: application/json');
             echo json_encode($this->data);
@@ -28,6 +30,28 @@ class MY_Controller extends CI_Controller
             $this->data['the_view_content'] = (is_null($the_view)) ? '' : $this->load->view($the_view, $this->data, true);
             $this->load->view('templates/' . $template . '_view', $this->data);
         }
+    }
+
+    protected function add_menu($url, $icon, $name = null)
+    {
+        $this->menu[] = [
+            'url' => $url,
+            'icon' => $icon,
+            'name' => $name];
+    }
+
+    protected function add_save()
+    {
+        $this->add_menu('javascript: submitForm()', '/assets/icons/save.png', 'Save');
+    }
+
+    protected function render_menu() {
+        $html = '<div id="left_menu">';
+        foreach ($this->menu as $item) {
+            $html .= '<a href="'.$item['url'].'" class="new_button" title="'.$item['name'].'"><img class="left_menu_item" src='.$item['icon'].'></a>';
+        }
+        $html .= '</div>';
+        return $html;
     }
 }
 
