@@ -33,6 +33,7 @@ class Home extends Auth_Controller
 
         $this->add_menu('/', '/assets/icons/return.png', 'Return');
         $this->add_save();
+        $this->add_delete();
 
         $this->render('home/details_view');
     }
@@ -49,5 +50,12 @@ class Home extends Auth_Controller
         $drone->save();
         $drone_id = $drone->getKey();
         redirect('home/details/'.$drone_id);
+    }
+
+    public function delete()
+    {
+        $drone_id = (int)$this->input->post('id');
+        Drone::destroy($drone_id);
+        redirect('/');
     }
 }

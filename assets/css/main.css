@@ -4,8 +4,8 @@ body {
 }
 
 .left_menu_item {
-    height: 21px;
-    width: auto;
+    max-height: 25px;
+    max-width: 25px;
 }
 
 #left_menu {

@@ -45,6 +45,11 @@ class MY_Controller extends CI_Controller
         $this->add_menu('javascript: submitForm()', '/assets/icons/save.png', 'Save');
     }
 
+    protected function add_delete()
+    {
+        $this->add_menu('javascript: submitDelete()', '/assets/icons/trash.png', 'Delete');
+    }
+
     protected function render_menu() {
         $html = '<div id="left_menu">';
         foreach ($this->menu as $item) {
