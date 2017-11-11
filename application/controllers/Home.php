@@ -40,8 +40,8 @@ class Home extends Auth_Controller
 
     public function save()
     {
-        $drone_id = (int)$this->input->post('id');
         $post = $this->input->post();
+        $drone_id = (int)$post['id'];
         $drone = Drone::findOrNew($drone_id);
         $drone->id_code = $post['id_code'];
         $drone->model = $post['model'];

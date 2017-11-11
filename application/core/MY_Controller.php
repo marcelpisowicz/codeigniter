@@ -34,10 +34,13 @@ class MY_Controller extends CI_Controller
 
     protected function add_menu($url, $icon, $name = null)
     {
+        $class = strtolower(str_replace(' ', '_', $name));
         $this->menu[] = [
             'url' => $url,
             'icon' => $icon,
-            'name' => $name];
+            'name' => $name,
+            'class' => $class
+        ];
     }
 
     protected function add_save()
@@ -53,7 +56,7 @@ class MY_Controller extends CI_Controller
     protected function render_menu() {
         $html = '<div id="left_menu">';
         foreach ($this->menu as $item) {
-            $html .= '<a href="'.$item['url'].'" class="new_button" title="'.$item['name'].'"><img class="left_menu_item" src='.$item['icon'].'></a>';
+            $html .= '<a href="'.$item['url'].'" class="new_button '.$item['class'].'" title="'.$item['name'].'"><img class="left_menu_item" src='.$item['icon'].'></a>';
         }
         $html .= '</div>';
         return $html;

@@ -25,8 +25,8 @@
 
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class=""><a href="#">Profile</a></li>
-                <li><a href="#">about</a></li>
+                <li><a href="/">Drones</a></li>
+                <li><a href="/routes/create">Routes</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"
                        data-toggle="dropdown"> Learn
@@ -39,6 +39,7 @@
                             <li><a href="#"> java</a></li>
                         </ul>
                 </li>
+                <li><a href="#">Profile</a></li>
                 <li><?= anchor('logout', 'Logout'); ?></li>
             </ul>
         </div>
