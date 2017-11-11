@@ -8,11 +8,12 @@
     #map_div {
         width: 100%;
         height: 100%;
-        padding-bottom: 150px;
+        padding-bottom: 180px;
     }
-    #route_name {
+    #route_details {
         color: black;
         margin-bottom: 10px;
+        width: 100%;
     }
 
 </style>
@@ -21,8 +22,23 @@
 <?= form_hidden('id', $id); ?>
 <?= form_hidden('route', null); ?>
 
+<table id="route_details">
+    <tr>
+        <td>Nazwa Trasy:</td>
+        <td><?= form_input('name', $route['name']); ?></td>
+        <td style="text-align: right;font-size: 12px;">
+            <?php if(!empty($creator['id'])): ?>
+            Utworzył: <?= $creator['username'] ?> <br> <?= $creator['email'] ?>
+            <?php endif; ?>
+        </td>
+    </tr>
+    <tr>
+        <td>Opis trasy:</td>
+        <td colspan="2"><?= form_textarea('description', $route['description'], ['style' => 'height:50px;width:100%']); ?></td>
+    </tr>
+</table>
+
 <div id="map_div">
-    <div id="route_name">Nazwa trasy: <?= form_input('name', $name); ?></div>
     <div id="map" style="height: 100%;width: 100%"></div>
 </div>
 
@@ -34,15 +50,10 @@
         e.preventDefault();
 
         var points = JSON.stringify(poly.getPath().getArray());
-
-//        for (var i = 0; i < paths.length; i++) {
-//            lat = paths[i].lat();
-//            lng = paths[i].lng();
-//        }
-
         $("input[name*='route']").val(points);
         submitForm();
     });
+
     // This example creates an interactive map which constructs a polyline based on
     // user clicks. Note that the polyline only appears once its path property
     // contains two LatLng coordinates.

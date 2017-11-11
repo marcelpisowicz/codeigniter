@@ -1773,7 +1773,6 @@ class Ion_auth_model extends CI_Model
     {
         $this->trigger_events('pre_login_remembered_user');
 
-        die('autologin');
         // check for valid data
         if (!get_cookie($this->config->item('identity_cookie_name', 'ion_auth'))
             || !get_cookie($this->config->item('remember_cookie_name', 'ion_auth'))

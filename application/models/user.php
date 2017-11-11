@@ -2,7 +2,7 @@
 
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Drone extends Eloquent {
+class User extends Eloquent {
     public $timestamps = false;
-    protected $table = "drones";
+    protected $table = "users";
 }

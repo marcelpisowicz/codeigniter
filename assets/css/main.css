@@ -303,7 +303,7 @@ body {
     background: rgba(0, 0, 0, 0.2);
 }
 
-input[type=text] {
+input[type=text], textarea {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
