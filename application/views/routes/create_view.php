@@ -50,7 +50,9 @@
         e.preventDefault();
 
         var points = JSON.stringify(poly.getPath().getArray());
-        $("input[name*='route']").val(points);
+        if(points.length > 0) {
+            $("input[name*='route']").val(points);
+        }
         submitForm();
     });
 
@@ -62,10 +64,34 @@
     var map;
 
     function initMap() {
+
+        <?php if(empty($id)) : ?>
+
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: {lat: 51.110, lng: 17.055}  // Center the map on Chicago, USA.
         });
+
+        <?php else : ?>
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: {lat: <?= $center_lat; ?>, lng: <?= $center_lng; ?>}
+        });
+
+        var currentRoute = <?= $route_points ?>;
+
+        var polylineRoute = new google.maps.Polyline({
+            path: currentRoute,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+
+        polylineRoute.setMap(map);
+
+        <?php endif; ?>
 
         poly = new google.maps.Polyline({
             strokeColor: '#000000',

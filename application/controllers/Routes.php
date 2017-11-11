@@ -18,6 +18,26 @@ class Routes extends Auth_Controller
         $this->data['route'] = $route;
         $this->data['creator'] = $creator;
 
+        $route_points = Route_Point::where('route_id', '=', $id)->get();
+        $points = [];
+
+        foreach ($route_points as $route_point) {
+            $points[] = ['lat' => $route_point->latitude, 'lng' => $route_point->longitude];
+        }
+
+        if(!empty($points)) {
+
+            $min_lat = min(array_column($points, 'lat'));
+            $max_lat = max(array_column($points, 'lat'));
+            $min_lng = min(array_column($points, 'lng'));
+            $max_lng = max(array_column($points, 'lng'));
+
+            $this->data['center_lat'] = $min_lat + (($max_lat - $min_lat) / 2);
+            $this->data['center_lng'] = $min_lng + (($max_lng - $min_lng) / 2);
+
+            $this->data['route_points'] = json_encode($points, JSON_NUMERIC_CHECK);
+        }
+
         $this->add_menu('/', '/assets/icons/return.png', 'Return');
         $this->add_save();
         $this->add_delete();
@@ -42,17 +62,20 @@ class Routes extends Auth_Controller
         $route_id = $route->getKey();
         $points = json_decode($post['route'], true);
 
-        Route_Point::where('route_id', $route_id)->delete();
+        if(!empty($points)) {
 
-        foreach($points as $key => $point) {
-            $values = [
-                'route_id' => $route_id,
-                'order' => $key,
-                'latitude' => $point['lat'],
-                'longitude' => $point['lng']
-            ];
+            Route_Point::where('route_id', $route_id)->delete();
 
-            Route_Point::create($values);
+            foreach ($points as $key => $point) {
+                $values = [
+                    'route_id' => $route_id,
+                    'order' => $key,
+                    'latitude' => $point['lat'],
+                    'longitude' => $point['lng']
+                ];
+
+                Route_Point::create($values);
+            }
         }
 
         redirect('routes/create/'.$route_id);
