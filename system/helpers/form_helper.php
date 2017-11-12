@@ -64,11 +64,11 @@ if (!function_exists('form_open')) {
     {
         $CI =& get_instance();
 
-        // If no action is provided then set to the current url
-        if (!$action) {
-            $action = $CI->config->site_url($CI->uri->uri_string());
-        } // If an action is not a full URL then turn it into one
-        elseif (strpos($action, '://') === FALSE) {
+        if(empty($action)) {
+            $temp = new CI_Router();
+            $path = $temp->default_controller;
+            $action = base_url().$path.'/save';
+        } elseif (strpos($action, '://') === FALSE) {
             $action = $CI->config->site_url($action);
         }
 

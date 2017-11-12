@@ -12,12 +12,13 @@ class Home extends Auth_Controller
 //        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
 //        $this->table->add_action('/home/location', '/assets/icons/location.png');
         $this->table->add_action('/streaming/index', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
-        $this->table->add_action('/home/details', '/assets/icons/document.png', 'Details');
+//        $this->table->add_action('/home/details', '/assets/icons/document.png', 'Details');
 //        $this->table->add_action('/home/analyze', '/assets/icons/analyze.png');
-//        $this->table->add_action('/home/delete', '/assets/icons/trash.png');
+        $this->table->add_action_delete();
+        $this->table->add_click();
 
-        $this->add_menu('/home/details', '/assets/icons/new.png', 'New');
-        $this->add_menu('#', '/assets/icons/settings.png', 'Settings');
+        $this->menu->add_new();
+        $this->menu->add_menu('#', '/assets/icons/settings.png', 'Settings');
 
         $this->data['table'] = $this->table->generate($drones);
 
@@ -31,9 +32,9 @@ class Home extends Auth_Controller
         $this->data['drone'] = $drone;
         $this->data['id'] = $id;
 
-        $this->add_menu('/', '/assets/icons/return.png', 'Return');
-        $this->add_save();
-        $this->add_delete();
+        $this->menu->add_menu('/', '/assets/icons/return.png', 'Return');
+        $this->menu->add_save();
+        $this->menu->add_delete();
 
         $this->render('home/details_view');
     }

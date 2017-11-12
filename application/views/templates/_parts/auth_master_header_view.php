@@ -26,7 +26,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Drones</a></li>
-                <li><a href="/routes/create">Routes</a></li>
+                <li><a href="/routes">Routes</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"
                        data-toggle="dropdown"> Learn

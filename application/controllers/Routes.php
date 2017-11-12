@@ -6,10 +6,26 @@ class Routes extends Auth_Controller
 
     public function index()
     {
+        $routes = Route::all()->toArray();
+        $this->data['routes'] = $routes;
+        $this->table->set_heading(['name', 'description']);
+//        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
+//        $this->table->add_action('/home/location', '/assets/icons/location.png');
+//        $this->table->add_action('/streaming/index', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
+//        $this->table->add_action('/home/details', '/assets/icons/document.png', 'Details');
+//        $this->table->add_action('/home/analyze', '/assets/icons/analyze.png');
+        $this->table->add_action_delete();
+        $this->table->add_click();
 
+        $this->menu->add_new();
+        $this->menu->add_menu('#', '/assets/icons/settings.png', 'Settings');
+
+        $this->data['table'] = $this->table->generate($routes);
+
+        $this->render('routes/index_view');
     }
 
-    public function create($id = null)
+    public function details($id = null)
     {
         $route = Route::find($id);
         $creator = User::find($route['creator_user_id']);
@@ -36,13 +52,16 @@ class Routes extends Auth_Controller
             $this->data['center_lng'] = $min_lng + (($max_lng - $min_lng) / 2);
 
             $this->data['route_points'] = json_encode($points, JSON_NUMERIC_CHECK);
+        } else {
+            $this->data['center_lat'] = 51.110;
+            $this->data['center_lng'] = 17.055;
         }
 
-        $this->add_menu('/', '/assets/icons/return.png', 'Return');
-        $this->add_save();
-        $this->add_delete();
+        $this->menu->add_menu('/', '/assets/icons/return.png', 'Return');
+        $this->menu->add_save();
+        $this->menu->add_delete();
 
-        $this->render('routes/create_view');
+        $this->render('routes/details_view');
     }
 
     public function save()
@@ -78,6 +97,6 @@ class Routes extends Auth_Controller
             }
         }
 
-        redirect('routes/create/'.$route_id);
+        redirect('routes/details/'.$route_id);
     }
 }

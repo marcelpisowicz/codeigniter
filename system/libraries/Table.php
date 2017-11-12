@@ -58,6 +58,7 @@ class CI_Table {
 	public $newline		    = "\n";
 	public $empty_cells	    = '';
     private $actions        = [];
+    private $url            = null;
     public $function	    = null;
 
 	/**
@@ -112,6 +113,18 @@ class CI_Table {
 		return $this;
 	}
 
+	public function add_click($url = null) {
+
+	    if(empty($url)) {
+	        $url = get_path().'/details';
+        }
+        $this->url = $url;
+    }
+
+	public function add_action_delete()
+    {
+        $this->add_action(get_path().'/delete', '/assets/icons/trash.png');
+    }
 
     public function add_action($url, $icon, $name = null, $new_window = null, $param = null, $style = null)
     {
@@ -294,6 +307,10 @@ class CI_Table {
 
 		// Build the table!
 
+        if(!empty($this->url)) {
+            $this->template['table_open'] = '<table class="datatable" data-href="'.$this->url.'">';
+            $this->template['tbody_open'] = '<tbody style="cursor: pointer">';
+		}
 		$out = $this->template['table_open'].$this->newline;
 
 		// Add any caption here
@@ -342,7 +359,7 @@ class CI_Table {
 				// We use modulus to alternate the row colors
 				$name = fmod($i++, 2) ? '' : 'alt_';
 
-				$out .= $this->template['row_'.$name.'start'].$this->newline;
+				$out .= '<tr data-id="'.$row['id']['data'].'">'.$this->newline;
                 $temp = null;
 
 				foreach ($row as $cell_key => $cell)
@@ -381,7 +398,7 @@ class CI_Table {
 				}
 
                 if(!empty($this->actions)) {
-                    $out .= '<td style="width: '.(count($this->actions)*30).'px">';
+                    $out .= '<td style="width: '.(count($this->actions)*35).'px">';
 
                     foreach($this->actions as $action) {
                         $url = $action['url'].'/'.$row[$action['param']]['data'];
@@ -499,7 +516,7 @@ class CI_Table {
 	protected function _default_template()
 	{
 		return array(
-			'table_open'		=> '<table border="0" cellpadding="4" cellspacing="0">',
+			'table_open'		=> '<table class="datatable">',
 
 			'thead_open'		=> '<thead>',
 			'thead_close'		=> '</thead>',

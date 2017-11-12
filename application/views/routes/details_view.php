@@ -17,8 +17,9 @@
     }
 
 </style>
+<script src="<?= base_url('assets/js/google_maps.js') ?>"></script>
 
-<?= form_open('routes/save'); ?>
+<?= form_open(); ?>
 <?= form_hidden('id', $id); ?>
 <?= form_hidden('route', null); ?>
 
@@ -46,14 +47,20 @@
 
 <script>
 
-    $('.save').on('click', function(e) {
-        e.preventDefault();
+    $(document).ready(function () {
 
-        var points = JSON.stringify(poly.getPath().getArray());
-        if(points.length > 0) {
-            $("input[name*='route']").val(points);
-        }
-        submitForm();
+        initMap();
+
+        $('.save').on('click', function(e) {
+            e.preventDefault();
+
+            var points = JSON.stringify(poly.getPath().getArray());
+            if(points.length > 0) {
+                $("input[name*='route']").val(points);
+            }
+            submitForm();
+        });
+
     });
 
     // This example creates an interactive map which constructs a polyline based on
@@ -65,33 +72,10 @@
 
     function initMap() {
 
-        <?php if(empty($id)) : ?>
-
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-            center: {lat: 51.110, lng: 17.055}  // Center the map on Chicago, USA.
-        });
-
-        <?php else : ?>
-
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: {lat: <?= $center_lat; ?>, lng: <?= $center_lng; ?>}
         });
-
-        var currentRoute = <?= $route_points ?>;
-
-        var polylineRoute = new google.maps.Polyline({
-            path: currentRoute,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
-
-        polylineRoute.setMap(map);
-
-        <?php endif; ?>
 
         poly = new google.maps.Polyline({
             strokeColor: '#000000',
@@ -100,19 +84,26 @@
         });
         poly.setMap(map);
 
-        // Add a listener for the click event
         map.addListener('click', addLatLng);
+
+        //Rysowanie obecnej trasy, jesli istnieje
+        <?php if(!empty($id) && isset($route_points)) : ?>
+        var currentRoute = <?= $route_points ?>;
+        var polylineRoute = new google.maps.Polyline({
+            path: currentRoute,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+        polylineRoute.setMap(map);
+        <?php endif; ?>
     }
 
-    // Handles click events on a map, and adds a new point to the Polyline.
     function addLatLng(event) {
         var path = poly.getPath();
-
-        // Because path is an MVCArray, we can simply append a new coordinate
-        // and it will automatically appear.
         path.push(event.latLng);
 
-        // Add a new marker at the new plotted point on the polyline.
         var marker = new google.maps.Marker({
             position: event.latLng,
             title: '#' + path.getLength(),
@@ -120,7 +111,3 @@
         });
     }
 </script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=<?= MAP_API_KEY ?>&callback=initMap">
-</script>
-

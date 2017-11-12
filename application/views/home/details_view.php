@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<?= form_open('home/save'); ?>
+<?= form_open(); ?>
 <?= form_hidden('id', $id); ?>
 <table id="details_table">
     <thead>
