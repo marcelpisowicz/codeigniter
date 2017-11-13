@@ -17,8 +17,8 @@ class Routes extends Auth_Controller
         $this->table->add_action_delete();
         $this->table->add_click();
 
-        $this->menu->add_new();
-        $this->menu->add_menu('#', '/assets/icons/settings.png', 'Settings');
+        $this->add_menu_new();
+        $this->add_menu('#', '/assets/icons/settings.png', 'Settings');
 
         $this->data['table'] = $this->table->generate($routes);
 
@@ -57,9 +57,9 @@ class Routes extends Auth_Controller
             $this->data['center_lng'] = 17.055;
         }
 
-        $this->menu->add_menu('/', '/assets/icons/return.png', 'Return');
-        $this->menu->add_save();
-        $this->menu->add_delete();
+        $this->add_menu_return();
+        $this->add_menu_save();
+        $this->add_menu_delete($id);
 
         $this->render('routes/details_view');
     }
@@ -97,6 +97,12 @@ class Routes extends Auth_Controller
             }
         }
 
-        redirect('routes/details/'.$route_id);
+        $this->redirect($route_id);
+    }
+
+    public function delete($id)
+    {
+        Route::destroy($id);
+        $this->redirect();
     }
 }

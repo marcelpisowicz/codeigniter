@@ -18,7 +18,11 @@ class Login extends MY_Controller
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if($this->ion_auth->logged_in()) {
-            redirect($this->get_url());
+            if(get_path() === 'login') {
+                redirect(base_url());
+            } else {
+                redirect(get_path());
+            }
         } else if ($this->form_validation->run() === FALSE) {
             $this->data['username'] = $this->input->post('username');
             $this->data['wrong_password'] = true;
@@ -26,7 +30,7 @@ class Login extends MY_Controller
         } else {
             $remember = (bool)$this->input->post('remember');
             if ($this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember)) {
-                redirect($this->get_url());
+                redirect(get_path());
             } else {
                 $_SESSION['auth_message'] = $this->ion_auth->errors();
                 $this->session->mark_as_flash('auth_message');
@@ -35,14 +39,5 @@ class Login extends MY_Controller
                 $this->render('login/index_view');
             }
         }
-    }
-
-    private function get_url()
-    {
-        $url = base_url($_SESSION['url']);
-        if($this->session->has_userdata('url')) {
-            unset($_SESSION['url']);
-        }
-        return $url;
     }
 }

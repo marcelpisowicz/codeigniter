@@ -4,21 +4,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MY_Controller extends CI_Controller
 {
     protected $data = [];
-    protected $menu;
+    protected $menu_items = [];
+    protected $class;
 
     function __construct()
     {
         parent::__construct();
-        $this->menu = new Menu();
+        $this->class = $this->router->class;
         $this->data['page_title'] = 'Drone Management System';
         $this->data['page_description'] = 'Drone Management System';
         $this->data['before_closing_head'] = '';
         $this->data['before_closing_body'] = '';
     }
 
+    protected function redirect($id = null)
+    {
+        if(!empty($id)) {
+            redirect('/' . $this->class . '/details/' . (int)$id);
+        } else {
+            redirect('/' . $this->class);
+        }
+    }
+
     protected function render($the_view = null, $template = 'public_master')
     {
-        $this->data['menu'] = $this->menu->render_menu();
+        $this->data['menu'] = $this->render_menu();
         if ($template == 'json' || $this->input->is_ajax_request()) {
             header('Content-Type: application/json');
             echo json_encode($this->data);
@@ -31,16 +41,11 @@ class MY_Controller extends CI_Controller
             $this->load->view('templates/' . $template . '_view', $this->data);
         }
     }
-}
-
-class Menu
-{
-    protected $menu_items = [];
 
     public function add_menu($url, $icon, $name = null)
     {
         $class = strtolower(str_replace(' ', '_', $name));
-        $this->menu[] = [
+        $this->menu_items[] = [
             'url' => $url,
             'icon' => $icon,
             'name' => $name,
@@ -48,24 +53,32 @@ class Menu
         ];
     }
 
-    public function add_new()
+    public function add_menu_new()
     {
         $this->add_menu(get_path().'/details', '/assets/icons/new.png', 'New');
     }
 
-    public function add_save()
+    public function add_menu_save()
     {
         $this->add_menu('javascript: submitForm()', '/assets/icons/save.png', 'Save');
     }
 
-    public function add_delete()
+    public function add_menu_delete($id)
     {
-        $this->add_menu('javascript: submitDelete()', '/assets/icons/trash.png', 'Delete');
+        if(!empty($id)) {
+            $url = '/'.$this->class . '/delete/' . (int)$id;
+            $this->add_menu($url, '/assets/icons/trash.png', 'Delete');
+        }
+    }
+
+    public function add_menu_return()
+    {
+        $this->add_menu( '/'.$this->class, '/assets/icons/return.png', 'Return');
     }
 
     public function render_menu() {
         $html = '<div id="left_menu">';
-        foreach ($this->menu as $item) {
+        foreach ($this->menu_items as $item) {
             $html .= '<a href="'.$item['url'].'" class="new_button '.$item['class'].'" title="'.$item['name'].'"><img class="left_menu_item" src='.$item['icon'].'></a>';
         }
         $html .= '</div>';

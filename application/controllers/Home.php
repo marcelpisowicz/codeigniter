@@ -17,8 +17,8 @@ class Home extends Auth_Controller
         $this->table->add_action_delete();
         $this->table->add_click();
 
-        $this->menu->add_new();
-        $this->menu->add_menu('#', '/assets/icons/settings.png', 'Settings');
+        $this->add_menu_new();
+        $this->add_menu('#', '/assets/icons/settings.png', 'Settings');
 
         $this->data['table'] = $this->table->generate($drones);
 
@@ -32,9 +32,9 @@ class Home extends Auth_Controller
         $this->data['drone'] = $drone;
         $this->data['id'] = $id;
 
-        $this->menu->add_menu('/', '/assets/icons/return.png', 'Return');
-        $this->menu->add_save();
-        $this->menu->add_delete();
+        $this->add_menu_return();
+        $this->add_menu_save();
+        $this->add_menu_delete($id);
 
         $this->render('home/details_view');
     }
@@ -50,13 +50,13 @@ class Home extends Auth_Controller
         $drone->active = (int)isset($post['active']);
         $drone->save();
         $drone_id = $drone->getKey();
-        redirect('home/details/'.$drone_id);
+
+        $this->redirect($drone_id);
     }
 
-    public function delete()
+    public function delete($id)
     {
-        $drone_id = (int)$this->input->post('id');
-        Drone::destroy($drone_id);
-        redirect('/');
+        Drone::destroy($id);
+        $this->redirect();
     }
 }

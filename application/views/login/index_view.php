@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/login.css') ?>"/>
 <body class="main">
 <div class="login-center">
-    <?= form_open(); ?>
+    <?= form_open('login'); ?>
     <div class="front signin_form">
         <p class="login_text">Login your account</p>
 
