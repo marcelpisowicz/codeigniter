@@ -15,6 +15,8 @@ class RoutesTable extends AbstractMigration
             ->addColumn('creator_user_id', 'integer')
             ->addColumn('active', 'boolean', ['default' => true])
             ->addColumn('description', 'text', ['null' => true])
+            ->addColumn('updated_at', 'datetime', ['null' => true])
+            ->addColumn('created_at', 'datetime', ['null' => true])
 //            ->addIndex(['name'], ['unique' => true])
             ->addForeignKey('creator_user_id', 'users', 'id', ['delete'=> 'RESTRICT', 'update'=> 'NO_ACTION'])
             ->save();

@@ -66,7 +66,7 @@ if (!function_exists('form_open')) {
 
         if(empty($action)) {
             $temp = new CI_Router();
-            $path = $temp->default_controller;
+            $path = $temp->class;
             $action = base_url().$path.'/save';
         } elseif (strpos($action, '://') === FALSE) {
             $action = $CI->config->site_url($action);
