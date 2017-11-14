@@ -50,13 +50,30 @@ class Home extends Auth_Controller
         $drone->active = (int)isset($post['active']);
         $drone->save();
         $drone_id = $drone->getKey();
-
+        
+        $this->checkDetailsTable($drone_id);
         $this->redirect($drone_id);
     }
 
     public function delete($id)
     {
         Drone::destroy($id);
+        $this->checkDetailsTable($id);
         $this->redirect();
+    }
+
+    private function checkDetailsTable($id)
+    {
+        if(!empty($id)) {
+
+            $drone = Drone::find($id);
+            $table = $this->db->get_where('information_schema.TABLES', ['TABLE_SCHEMA' => 'details', 'TABLE_NAME' => 'uav_'.$id])->result();
+
+            if(empty($table) !== empty($drone)) {
+                if(empty($table)) {
+                    $this->db->query("CREATE TABLE details.uav_".$id." (lat NUMERIC(15,12), lng NUMERIC(15,12), time DATETIME)");
+                }
+            }
+        }
     }
 }
