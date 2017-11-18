@@ -19,19 +19,10 @@ class InitMigration extends AbstractMigration
             ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated', 'datetime', ['null' => true])
             ->addColumn('last_login', 'datetime', ['null' => true])
+            ->addColumn('lang', 'string', ['default' => 'pl', 'limit' => 8])
             ->addColumn('active', 'boolean', ['default' => false])
             ->addColumn('admin', 'boolean', ['default' => false])
             ->addIndex(['username', 'email'], ['unique' => true])
-            ->save();
-
-        if ($this->hasTable('groups')) {
-            $this->dropTable('groups');
-        }
-
-        $groups = $this->table('groups');
-        $groups->addColumn('name', 'string', ['limit' => 20])
-            ->addColumn('description', 'string', ['limit' => 100, 'null' => true])
-            ->addIndex(['id'], ['unique' => true])
             ->save();
 
         if ($this->hasTable('login_attempts')) {
@@ -44,21 +35,6 @@ class InitMigration extends AbstractMigration
             ->addColumn('time', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addIndex(['id'], ['unique' => true])
             ->save();
-
-        $rows = [
-            [
-                'id' => '1',
-                'name' => 'admin',
-                'description' => 'Administrator'
-            ],
-            [
-                'id' => '2',
-                'name' => 'members',
-                'description' => 'General User'
-            ]
-        ];
-
-        $this->insert('groups', $rows);
 
         $singleRow = [
             'ip_address' => '127.0.0.1',

@@ -8,12 +8,9 @@ class Routes extends Auth_Controller
     {
         $routes = Route::all();
         $this->data['routes'] = $routes;
-        $this->table->set_heading(['name', 'description']);
-//        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
-//        $this->table->add_action('/home/location', '/assets/icons/location.png');
-//        $this->table->add_action('/streaming/index', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
-//        $this->table->add_action('/home/details', '/assets/icons/document.png', 'Details');
-//        $this->table->add_action('/home/analyze', '/assets/icons/analyze.png');
+        $this->table->add_column(_('Nazwa'), 'name');
+        $this->table->add_column(_('Opis'), 'description');
+
         $this->table->add_action_delete();
         $this->table->add_click();
 
@@ -27,12 +24,12 @@ class Routes extends Auth_Controller
 
     public function details($id = null)
     {
-        $route = Route::find($id);
+        $route = Route::findOrNew($id);
         $creator = User::find($route['creator_user_id']);
 
+        $this->model($route);
         $this->data['id'] = $id;
-        $this->data['route'] = $route;
-        $this->data['creator'] = $creator;
+        $this->data['creator'] = $creator->toArray();
 
         $route_points = Route_Point::where('route_id', '=', $id)->get();
         $points = [];

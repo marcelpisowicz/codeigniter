@@ -3,6 +3,22 @@ body {
     background-size: cover;
 }
 
+#page_logo {
+    background-image: url(/assets/images/logo.png);
+    background-size: contain;
+    height: 40px;
+    background-repeat: no-repeat;
+    width: 100px;
+    position: absolute;
+    margin-top: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#page_logo:hover {
+    opacity: 1;
+}
+
 .left_menu_item {
     max-height: 25px;
     max-width: 25px;
@@ -54,7 +70,7 @@ body {
 
 #main_nav {
     position: absolute;
-    padding-left: 1%;
+    padding-left: 2%;
     padding-right: 2%;
     background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%);
     background: -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%);
@@ -310,13 +326,18 @@ body {
     background: rgba(0, 0, 0, 0.2);
 }
 
-input[type=text], textarea, select {
+input[type=text], input[type=password], textarea, select {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
     border: 1px solid rgba(128, 128, 128, 0.6);
     padding: 5px;
     background: rgba(255, 255, 255, 0.6);
+}
+
+input[type=text]:read-only, input[type=password]:read-only, textarea:read-only, select:read-only {
+    background: #d0d0d04f;
+    color: #757575;
 }
 
 input[type=checkbox] {

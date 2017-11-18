@@ -64,10 +64,14 @@ ul.navbar-nav li {
     margin-right: .5em;
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
     background: rgba(0, 0, 0, 0.1);
 }
 
 .login_input {
     padding: 6px 12px !important;
+}
+
+.remember_me {
+    float: right;
 }

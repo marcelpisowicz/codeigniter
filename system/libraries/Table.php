@@ -52,7 +52,7 @@ class CI_Table
 {
 
     public $rows = [];
-    public $heading = [];
+    public $columns = [];
     public $auto_heading = true;
     public $caption = null;
     public $template = null;
@@ -96,19 +96,13 @@ class CI_Table
         return TRUE;
     }
 
-    // --------------------------------------------------------------------
-
-    /**
-     * Set the table heading
-     *
-     * Can be passed as an array or discreet params
-     *
-     * @param    mixed
-     * @return    CI_Table
-     */
-    public function set_heading($args = array())
+    //Dodawanie kolumn
+    public function add_column($column_name, $db_field, $name_map = null)
     {
-        $this->heading = $this->_prep_args(func_get_args());
+        if($name_map === true) {
+            $name_map = [0 => _('nie'), 1 => _('tak')];
+        }
+        $this->columns[$db_field] = ['column_name' => $column_name, 'name_map' => $name_map];
         return $this;
     }
 
@@ -131,20 +125,17 @@ class CI_Table
         if (empty($param)) {
             $param = 'id';
         }
-        $this->heading['Actions']['data'] = 'Akcje';
 
         $this->actions [] = [
             'name' => $name,
             'url' => $url,
             'icon' => $icon,
             'param' => $param,
-            'style' => $style,
+            'style' => "text-align:center;" . $style,
             'new_window' => $new_window
         ];
 
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Set columns. Takes a one-dimensional array as input and creates
@@ -186,8 +177,6 @@ class CI_Table
         return $new;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Set "empty" cells
      *
@@ -202,8 +191,6 @@ class CI_Table
         return $this;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Add a table row
      *
@@ -217,8 +204,6 @@ class CI_Table
         $this->rows[] = $this->_prep_args(func_get_args());
         return $this;
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Prep Args
@@ -244,8 +229,6 @@ class CI_Table
         return $args;
     }
 
-    // --------------------------------------------------------------------
-
     /**
      * Add a table caption
      *
@@ -257,8 +240,6 @@ class CI_Table
         $this->caption = $caption;
         return $this;
     }
-
-    // --------------------------------------------------------------------
 
     /**
      * Generate the table
@@ -273,80 +254,64 @@ class CI_Table
 
         //Modyfikacje pod wysyłanie listy obiektów i pobranie nazw headerów
         $fields = null;
-        if(!is_array($table_data)) {
-            if(!empty(current($table_data))) {
+        if (!is_array($table_data)) {
+            if (!empty(current($table_data))) {
                 $fields = (array)current(current($table_data))->fields;
             }
             $table_data = $table_data->toArray();
         }
 
-        if (!empty($table_data)) {
-            if ($table_data instanceof CI_DB_result) {
-                $this->_set_from_db_result($table_data);
-            } elseif (is_array($table_data)) {
-                $this->_set_from_array($table_data);
-            }
-        } else {
-            return '<div class="datatable empty_datatable">'._('Brak danych').'!</div>';
-        }
-
         // Is there anything to display? No? Smite them!
-        if (empty($this->heading) && empty($this->rows)) {
-            return 'Undefined table data';
-        }
-
-        // Compile and validate the template date
-        $this->_compile_template();
-
-        // Validate a possibly existing custom cell manipulation function
-        if (isset($this->function) && !is_callable($this->function)) {
-            $this->function = NULL;
-        }
-
-        // Build the table!
-
-        if (!empty($this->url)) {
-            $this->template['table_open'] = '<table class="datatable" data-href="' . $this->url . '">';
-            $this->template['tbody_open'] = '<tbody style="cursor: pointer">';
-        }
-        $out = $this->template['table_open'] . $this->newline;
-
-        // Add any caption here
-        if ($this->caption) {
-            $out .= '<caption>' . $this->caption . '</caption>' . $this->newline;
-        }
-
-        // Is there a table heading to display?
-        if (!empty($this->heading)) {
-            $out .= $this->template['thead_open'] . $this->newline . $this->template['heading_row_start'] . $this->newline;
-
-            foreach ($this->heading as $heading) {
-                $temp = $this->template['heading_cell_start'];
-
-                foreach ($heading as $key => $val) {
-                    if ($key !== 'data') {
-                        if (!empty($fields[$val]['field_name'])) {
-                            $val = $fields[$val]['field_name'];
-                        }
-                        $temp = str_replace('<th', '<th ' . $key . '="' . $val . '"', $temp);
-                    } else if (!empty($fields[$val]['field_name'])) {
-                        $heading['data'] = $fields[$val]['field_name'];
-                    }
-                }
-
-                $out .= $temp . (isset($heading['data']) ? $heading['data'] : '') . $this->template['heading_cell_end'];
-            }
-
-            $out .= $this->template['heading_row_end'] . $this->newline . $this->template['thead_close'] . $this->newline;
+        if (empty($this->columns)) {
+            return _('Undefined table columns');
         }
 
         // Build the table rows
-        if (!empty($this->rows)) {
+        if (!empty($table_data)) {
+
+            // Compile and validate the template date
+            $this->_compile_template();
+
+            // Validate a possibly existing custom cell manipulation function
+            if (isset($this->function) && !is_callable($this->function)) {
+                $this->function = NULL;
+            }
+
+            // Build the table!
+
+            if (!empty($this->url)) {
+                $this->template['table_open'] = '<table class="datatable" data-href="' . $this->url . '">';
+                $this->template['tbody_open'] = '<tbody style="cursor: pointer">';
+            }
+            $out = $this->template['table_open'] . $this->newline;
+
+            // Add any caption here
+            if ($this->caption) {
+                $out .= '<caption>' . $this->caption . '</caption>' . $this->newline;
+            }
+
+            // Is there a table heading to display?
+            if (!empty($this->columns)) {
+                $out .= $this->template['thead_open'] . $this->newline . $this->template['heading_row_start'] . $this->newline;
+
+                foreach ($this->columns as $column) {
+                    $out .= $this->template['heading_cell_start'] . $column['column_name'] . $this->template['heading_cell_end'];
+                }
+
+                if (!empty($this->actions)) {
+                    $out .= '<th style="text-align: center">' . _('Akcje') . $this->template['heading_cell_end'];
+                }
+
+                $out .= $this->template['heading_row_end'] . $this->newline . $this->template['thead_close'] . $this->newline;
+            }
+
             $out .= $this->template['tbody_open'] . $this->newline;
 
             $i = 1;
-            $headings = array_values(array_column($this->heading, 'data'));
-            foreach ($this->rows as $row) {
+            $headings = array_keys($this->columns);
+
+            foreach ($table_data as $row) {
+
                 if (!is_array($row)) {
                     break;
                 }
@@ -354,7 +319,7 @@ class CI_Table
                 // We use modulus to alternate the row colors
                 $name = fmod($i++, 2) ? '' : 'alt_';
 
-                $out .= '<tr data-id="' . $row['id']['data'] . '">' . $this->newline;
+                $out .= '<tr data-id="' . $row['id'] . '">' . $this->newline;
                 $temp = null;
 
                 foreach ($row as $cell_key => $cell) {
@@ -362,36 +327,16 @@ class CI_Table
                         continue;
                     }
 
-                    $temp = $this->template['cell_' . $name . 'start'];
-
-//                    var_dump($fields); die;
-                    foreach ($cell as $key => $val) {
-                        if ($key !== 'data') {
-                            if (!empty($fields[$cell_key]['field_type'][$val])) {
-                                $val = $fields[$cell_key]['field_type'][$val];
-                            }
-                            $temp = str_replace('<td', '<td ' . $key . '="' . $val . '"', $temp);
-                        } else if (!empty($fields[$cell_key]['field_type'][$cell['data']])) {
-                            $cell['data'] = $fields[$cell_key]['field_type'][$cell['data']];
-                        }
+                    $name_map = $this->columns[$cell_key]['name_map'];
+                    if(!empty($name_map) && isset($name_map[$cell])) {
+                        $cell = $name_map[$cell];
                     }
 
-                    $cell = isset($cell['data']) ? $cell['data'] : '';
-                    $out .= $temp;
-
-                    if ($cell === '' OR $cell === NULL) {
-                        $out .= $this->empty_cells;
-                    } elseif (isset($this->function)) {
-                        $out .= call_user_func($this->function, $cell);
-                    } else {
-                        $out .= $cell;
-                    }
-
-                    $out .= $this->template['cell_' . $name . 'end'];
+                    $out .= $this->template['cell_' . $name . 'start'] . $cell . $this->template['cell_' . $name . 'end'];
                 }
 
                 if (!empty($this->actions)) {
-                    $out .= '<td style="width: ' . (count($this->actions) * 35) . 'px">';
+                    $out .= '<td style="text-align:center;width: ' . (count($this->actions) * 35) . 'px">';
 
                     foreach ($this->actions as $action) {
                         $url = $action['url'] . '/' . $row[$action['param']]['data'];
@@ -406,6 +351,8 @@ class CI_Table
             }
 
             $out .= $this->template['tbody_close'] . $this->newline;
+        } else {
+            return '<div class="datatable empty_datatable">' . _('Brak danych') . '!</div>';
         }
 
         $out .= $this->template['table_close'];
@@ -429,45 +376,6 @@ class CI_Table
         $this->heading = array();
         $this->auto_heading = TRUE;
         return $this;
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Set table data from a database result object
-     *
-     * @param    CI_DB_result $object Database result object
-     * @return    void
-     */
-    protected function _set_from_db_result($object)
-    {
-        // First generate the headings from the table column names
-        if ($this->auto_heading === TRUE && empty($this->heading)) {
-            $this->heading = $this->_prep_args($object->list_fields());
-        }
-
-        foreach ($object->result_array() as $row) {
-            $this->rows[] = $this->_prep_args($row);
-        }
-    }
-
-    // --------------------------------------------------------------------
-
-    /**
-     * Set table data from an array
-     *
-     * @param    array $data
-     * @return    void
-     */
-    protected function _set_from_array($data)
-    {
-        if ($this->auto_heading === TRUE && empty($this->heading)) {
-            $this->heading = $this->_prep_args(array_shift($data));
-        }
-
-        foreach ($data as &$row) {
-            $this->rows[] = $this->_prep_args($row);
-        }
     }
 
     // --------------------------------------------------------------------

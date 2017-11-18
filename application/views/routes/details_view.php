@@ -39,7 +39,7 @@
 <table id="route_details">
     <tr>
         <td><?= _('Nazwa Trasy') ?></td>
-        <td><?= form_input('name', $route['name']); ?></td>
+        <td><?= form_input('name', $model['name']); ?></td>
         <td style="text-align: right;font-size: 12px;">
             <?php if(!empty($creator['id'])): ?>
                 <?= _('Utworzył')?>: <?= $creator['username'] ?> <br> <?= $creator['email'] ?>
@@ -48,7 +48,7 @@
     </tr>
     <tr>
         <td><?= _('Opis trasy') ?></td>
-        <td colspan="2"><?= form_textarea('description', $route['description'], ['style' => 'height:50px;width:100%']); ?></td>
+        <td colspan="2"><?= form_textarea('description', $model['description'], ['style' => 'height:50px;width:100%']); ?></td>
     </tr>
 </table>
 

@@ -4,7 +4,7 @@
 <div class="login-center">
     <?= form_open('login'); ?>
     <div class="front signin_form">
-        <p class="login_text"><?= _('Login your account') ?></p>
+        <p class="login_text"><?= _('Logowanie') ?></p>
 
         <div class="input-group">
             <?= form_input('username', $username, ['class' => 'form-control login_input', 'placeholder' => _('nazwa użytkownika')]) ?>
@@ -15,17 +15,17 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
         </div>
         <div class="form-group sign-btn">
-            <input type="submit" class="btn" value="Log in">
-            <div class="checkbox">
+            <input type="submit" class="btn" value="<?= _('Zaloguj') ?>">
+            <div class="checkbox remember_me">
                 <label class="checkbox_label">
                     <input type="checkbox" name="remember">
                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                    <span class="checkbox_label"><?= _('Remember me') ?></span>
+                    <span class="checkbox_label"><?= _('Zapamiętaj mnie') ?></span>
                 </label>
             </div>
         </div>
         <div class="form-group">
-            <p><strong><?= _('New here?')?></strong><br>
+            <p><strong><?= _('Nie masz konta?')?></strong><br>
                 <a href="/register"><?= _('Rejestracja') ?></a>
             </p>
         </div>

@@ -7,18 +7,9 @@ class Drone extends Eloquent {
     public $timestamps = false;
     protected $table = "drones";
 
-    public $fields = [
-        'id_code' => ['field_name' => 'Identyfikator'],
-        'model' => ['field_name' => 'Model'],
-        'stream_source' => ['field_name' => 'Źródło transmisji video'],
-        'active' => ['field_name' => 'Aktywny'],
-        'type' => [
-            'field_name' => 'Typ urządzenia',
-            'field_type' => [
-                1 => 'Wielowirnikowiec',
-                2 => 'Płatowiec'
-            ]
-        ]
+    private static $drone_types = [
+        1 => 'Wielowirnikowiec',
+        2 => 'Płatowiec'
     ];
 
     public static function checkDetailsTable($id)
@@ -39,8 +30,8 @@ class Drone extends Eloquent {
         }
     }
 
-    public function getTypes()
+    public static function getTypes()
     {
-        return $this->fields['type']['field_type'];
+        return Drone::$drone_types;
     }
 }

@@ -11,23 +11,23 @@
     <tbody>
     <tr>
         <td><?= _('Identyfikator drona') ?></td>
-        <td><?= form_input('id_code', $drone['id_code']); ?></td>
+        <td><?= form_input('id_code', $model['id_code']); ?></td>
     </tr>
     <tr>
         <td><?= _('Model') ?></td>
-        <td><?= form_input('model', $drone['model']); ?></td>
+        <td><?= form_input('model', $model['model']); ?></td>
     </tr>
     <tr>
         <td><?= _('Typ') ?></td>
-        <td><?= form_dropdown('type', $drone_types, $drone['type']); ?></td>
+        <td><?= form_dropdown('type', $drone_types, $model['type']); ?></td>
     </tr>
     <tr>
         <td><?= _('Źródło streama')?></td>
-        <td><?= form_input('stream_source', $drone['stream_source']); ?></td>
+        <td><?= form_input('stream_source', $model['stream_source']); ?></td>
     </tr>
     <tr>
         <td><?= _('Aktywny')?></td>
-        <td><?= form_checkbox('active', $drone['active']); ?></td>
+        <td><?= form_checkbox('active', $model['active']); ?></td>
     </tr>
     </tbody>
 </table>

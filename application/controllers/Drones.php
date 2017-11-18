@@ -1,14 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends Auth_Controller
+class Drones extends Auth_Controller
 {
 
     public function index()
     {
         $drones = Drone::all();
-        $this->data['drones'] = $drones;
-        $this->table->set_heading(['id_code', 'model', 'type']);
+        $this->table->add_column(_('Identyfikator'), 'id_code');
+        $this->table->add_column(_('Model'), 'model');
+        $this->table->add_column(_('Typ urządzenia'), 'type');
+        $this->table->add_column(_('Aktywny'), 'active', Drone::getTypes());
 //        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
 //        $this->table->add_action('/home/location', '/assets/icons/location.png');
         $this->table->add_action('/streaming/index', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
@@ -22,14 +24,15 @@ class Home extends Auth_Controller
 
         $this->data['table'] = $this->table->generate($drones);
 
-        $this->render('home/index_view');
+        $this->render('drones/index_view');
     }
 
     public function details($id = null)
     {
-        $drone = Drone::find($id);
+        $drone = Drone::findOrNew($id);
 
-        $this->data['drone'] = $drone;
+        $this->model($drone);
+//        $this->data['drone'] = empty($model) ? null : $model;
         $this->data['id'] = $id;
         $this->data['drone_types'] = arr_form($drone->getTypes());
 
@@ -37,7 +40,7 @@ class Home extends Auth_Controller
         $this->add_menu_save();
         $this->add_menu_delete($id);
 
-        $this->render('home/details_view');
+        $this->render('drones/details_view');
     }
 
     public function save()
@@ -45,8 +48,6 @@ class Home extends Auth_Controller
         $post = $this->input->post();
         $drone_id = (int)$post['id'];
         $drone = Drone::findOrNew($drone_id);
-//        var_dump($post); die;
-//        $drone->fill($post);
         $drone->id_code = $post['id_code'];
         $drone->model = $post['model'];
         $drone->stream_source = $post['stream_source'];

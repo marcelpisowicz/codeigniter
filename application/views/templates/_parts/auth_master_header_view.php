@@ -20,26 +20,25 @@
             <span class="icon-bar"> </span>
         </button>
 
-        <a class="navbar-brand" href="/">dr.One</a>
-
+        <a href="/"><div id="page_logo"></div></a>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">Drones</a></li>
-                <li><a href="/routes">Routes</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle"
-                       data-toggle="dropdown"> Learn
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">Example</li>
-                            <li><a href="#"> c++</a></li>
-                            <li><a href="#"> java</a></li>
-                            <li class="dropdown-header">tutorials</li>
-                            <li><a href="#"> c++</a></li>
-                            <li><a href="#"> java</a></li>
-                        </ul>
-                </li>
-                <li><a href="#">Profile</a></li>
-                <li><?= anchor('logout', 'Logout'); ?></li>
+                <li><a href="/drones"><?= _('Drony') ?></a></li>
+                <li><a href="/routes"><?= _('Trasy') ?></a></li>
+                <li><a href="/users"><?= _('Użytkownicy') ?></a></li>
+<!--                <li class="dropdown">-->
+<!--                    <a href="#" class="dropdown-toggle"-->
+<!--                       data-toggle="dropdown"> Learn-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li class="dropdown-header">Example</li>-->
+<!--                            <li><a href="#"> c++</a></li>-->
+<!--                            <li><a href="#"> java</a></li>-->
+<!--                            <li class="dropdown-header">tutorials</li>-->
+<!--                            <li><a href="#"> c++</a></li>-->
+<!--                            <li><a href="#"> java</a></li>-->
+<!--                        </ul>-->
+<!--                </li>-->
+                <li><?= anchor('logout', _('Wyloguj')); ?></li>
             </ul>
         </div>
     </div>

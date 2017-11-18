@@ -79,10 +79,15 @@ class MY_Controller extends CI_Controller
     public function render_menu() {
         $html = '<div id="left_menu">';
         foreach ($this->menu_items as $item) {
-            $html .= '<a href="'.$item['url'].'" class="new_button '.$item['class'].'" title="'.$item['name'].'"><img class="left_menu_item" src='.$item['icon'].'></a>';
+            $html .= '<a href="'.$item['url'].'" class="new_button '.$item['class'].'" title="'._($item['name']).'"><img class="left_menu_item" src='.$item['icon'].'></a>';
         }
         $html .= '</div>';
         return $html;
+    }
+
+    public function model($model) {
+        $model = $model->toArray();
+        $this->data['model'] = empty($model) ? null : $model;
     }
 }
 
