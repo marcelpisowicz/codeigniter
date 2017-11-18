@@ -67,3 +67,7 @@ ul.navbar-nav li {
 input[type=text] {
     background: rgba(0, 0, 0, 0.1);
 }
+
+.login_input {
+    padding: 6px 12px !important;
+}

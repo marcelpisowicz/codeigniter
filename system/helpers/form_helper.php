@@ -64,10 +64,10 @@ if (!function_exists('form_open')) {
     {
         $CI =& get_instance();
 
-        if(empty($action)) {
+        if (empty($action)) {
             $temp = new CI_Router();
             $path = $temp->class;
-            $action = base_url().$path.'/save';
+            $action = base_url() . $path . '/save';
         } elseif (strpos($action, '://') === FALSE) {
             $action = $CI->config->site_url($action);
         }
@@ -324,7 +324,7 @@ if (!function_exists('form_dropdown')) {
      * @param    mixed $extra
      * @return    string
      */
-    function form_dropdown($data = '', $options = array(), $selected = array(), $extra = '')
+    function form_dropdown($data, $options = array(), $selected = array(), $extra = '')
     {
         $defaults = array();
 
@@ -339,7 +339,7 @@ if (!function_exists('form_dropdown')) {
                 unset($data['options']); // select tags don't use an options attribute
             }
         } else {
-            $defaults = array('name' => $data);
+            $defaults = array('name' => $data, 'id' => $data . '_id');
         }
 
         is_array($selected) OR $selected = array($selected);
@@ -355,6 +355,8 @@ if (!function_exists('form_dropdown')) {
                 $selected = array($_POST[$data]);
             }
         }
+
+        $select_id = empty($data['id']) ? $defaults['id'] : $data['id'];
 
         $extra = _attributes_to_string($extra);
 
@@ -386,7 +388,14 @@ if (!function_exists('form_dropdown')) {
             }
         }
 
-        return $form . "</select>\n";
+        if (!empty($select_id)) {
+            $select2 = "
+<script>
+    $('#" . $select_id . "').select2();
+</script>";
+        }
+
+        return $form . "</select>" . $select2;
     }
 }
 

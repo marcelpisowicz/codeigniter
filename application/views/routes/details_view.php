@@ -8,16 +8,29 @@
     #map_div {
         width: 100%;
         height: 100%;
-        padding-bottom: 180px;
+        padding-bottom: 190px;
     }
     #route_details {
+        background: rgba(255, 255, 255, 0.65);
+        border-radius: 5px;
         color: black;
         margin-bottom: 10px;
         width: 100%;
     }
+    #route_details td:nth-child(1) {
+        text-align: right;
+    }
+    #route_details tr td {
+        padding: 4px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        color: #5f6062;
+        font-size: 15px;
+    }
 
 </style>
-<script src="<?= base_url('assets/js/google_maps.js') ?>"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?= MAP_API_KEY ?>&callback=initMap"></script>
+<!--<script src="<?= base_url('assets/js/google_maps.js') ?>"></script>-->
 
 <?= form_open(); ?>
 <?= form_hidden('id', $id); ?>
@@ -25,16 +38,16 @@
 
 <table id="route_details">
     <tr>
-        <td>Nazwa Trasy:</td>
+        <td><?= _('Nazwa Trasy') ?></td>
         <td><?= form_input('name', $route['name']); ?></td>
         <td style="text-align: right;font-size: 12px;">
             <?php if(!empty($creator['id'])): ?>
-            Utworzył: <?= $creator['username'] ?> <br> <?= $creator['email'] ?>
+                <?= _('Utworzył')?>: <?= $creator['username'] ?> <br> <?= $creator['email'] ?>
             <?php endif; ?>
         </td>
     </tr>
     <tr>
-        <td>Opis trasy:</td>
+        <td><?= _('Opis trasy') ?></td>
         <td colspan="2"><?= form_textarea('description', $route['description'], ['style' => 'height:50px;width:100%']); ?></td>
     </tr>
 </table>

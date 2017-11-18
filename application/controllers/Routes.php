@@ -6,7 +6,7 @@ class Routes extends Auth_Controller
 
     public function index()
     {
-        $routes = Route::all()->toArray();
+        $routes = Route::all();
         $this->data['routes'] = $routes;
         $this->table->set_heading(['name', 'description']);
 //        $this->table->add_action('/home/gps', '/assets/icons/gps.png');

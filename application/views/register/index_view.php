@@ -4,7 +4,7 @@
 <div class="login-center">
     <?= form_open(); ?>
     <div class="front signin_form">
-        <p class="login_text">Register new account</p>
+        <p class="login_text"><?= _('Rejestracja nowego konta') ?></p>
 
         <div class="input-group">
             <?= form_input('username', $username, ['class' => 'form-control'.(empty(form_error('username')) ? '' : ' error-form'), 'placeholder' => 'username']) ?>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            <p><a href="/user/login" >Sign in</a></p>
+            <p><a href="/user/login" ><?= _('Zaloguj') ?></a></p>
         </div>
 
     </div>

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title><?= $page_title; ?></title>
     <meta name="description" value="<?= $page_description; ?>"/>
-    <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <?= $before_closing_head; ?>
 </head>

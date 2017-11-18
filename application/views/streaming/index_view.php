@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Flowplayer · Live stream</title>
+    <title><?= _('Streaming video') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="<?= base_url('assets/css/flowplayer/skin.css') ?>"/>
@@ -13,7 +13,7 @@
 <body>
 <?php if (empty($source)) : ?>
 <div style="width: 100%;height:100%;text-align: center; font-size: 20px; color: red;background: rgba(255, 255, 255, 0.65);"; >
-    <span>Brak zdefiniowanego źródła wideo w szczegółach urządzenia</span>
+    <span><?= _('Brak zdefiniowanego źródła wideo w szczegółach urządzenia') ?></span>
 </div>
 
 <?php else: ?>

@@ -6,9 +6,9 @@ class Home extends Auth_Controller
 
     public function index()
     {
-        $drones = Drone::all()->toArray();
+        $drones = Drone::all();
         $this->data['drones'] = $drones;
-        $this->table->set_heading(['id_code', 'model']);
+        $this->table->set_heading(['id_code', 'model', 'type']);
 //        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
 //        $this->table->add_action('/home/location', '/assets/icons/location.png');
         $this->table->add_action('/streaming/index', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
@@ -31,6 +31,7 @@ class Home extends Auth_Controller
 
         $this->data['drone'] = $drone;
         $this->data['id'] = $id;
+        $this->data['drone_types'] = arr_form($drone->getTypes());
 
         $this->add_menu_return();
         $this->add_menu_save();
@@ -44,36 +45,24 @@ class Home extends Auth_Controller
         $post = $this->input->post();
         $drone_id = (int)$post['id'];
         $drone = Drone::findOrNew($drone_id);
+//        var_dump($post); die;
+//        $drone->fill($post);
         $drone->id_code = $post['id_code'];
         $drone->model = $post['model'];
         $drone->stream_source = $post['stream_source'];
         $drone->active = (int)isset($post['active']);
+        $drone->type = (int)$post['type'];
         $drone->save();
         $drone_id = $drone->getKey();
-        
-        $this->checkDetailsTable($drone_id);
+
+        Drone::checkDetailsTable($drone_id);
         $this->redirect($drone_id);
     }
 
     public function delete($id)
     {
         Drone::destroy($id);
-        $this->checkDetailsTable($id);
+        Drone::checkDetailsTable($id);
         $this->redirect();
-    }
-
-    private function checkDetailsTable($id)
-    {
-        if(!empty($id)) {
-
-            $drone = Drone::find($id);
-            $table = $this->db->get_where('information_schema.TABLES', ['TABLE_SCHEMA' => 'details', 'TABLE_NAME' => 'uav_'.$id])->result();
-
-            if(empty($table) !== empty($drone)) {
-                if(empty($table)) {
-                    $this->db->query("CREATE TABLE details.uav_".$id." (lat NUMERIC(15,12), lng NUMERIC(15,12), time DATETIME)");
-                }
-            }
-        }
     }
 }
