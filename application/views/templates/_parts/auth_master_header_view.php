@@ -20,27 +20,43 @@
             <span class="icon-bar"> </span>
         </button>
 
-        <a href="/"><div id="page_logo"></div></a>
+        <a href="/">
+            <div id="page_logo"></div>
+        </a>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/drones"><?= _('Drony') ?></a></li>
                 <li><a href="/routes"><?= _('Trasy') ?></a></li>
                 <li><a href="/users"><?= _('Użytkownicy') ?></a></li>
-<!--                <li class="dropdown">-->
-<!--                    <a href="#" class="dropdown-toggle"-->
-<!--                       data-toggle="dropdown"> Learn-->
-<!--                        <ul class="dropdown-menu">-->
-<!--                            <li class="dropdown-header">Example</li>-->
-<!--                            <li><a href="#"> c++</a></li>-->
-<!--                            <li><a href="#"> java</a></li>-->
-<!--                            <li class="dropdown-header">tutorials</li>-->
-<!--                            <li><a href="#"> c++</a></li>-->
-<!--                            <li><a href="#"> java</a></li>-->
-<!--                        </ul>-->
-<!--                </li>-->
+                <!--                <li class="dropdown">-->
+                <!--                    <a href="#" class="dropdown-toggle"-->
+                <!--                       data-toggle="dropdown"> Learn-->
+                <!--                        <ul class="dropdown-menu">-->
+                <!--                            <li class="dropdown-header">Example</li>-->
+                <!--                            <li><a href="#"> c++</a></li>-->
+                <!--                            <li><a href="#"> java</a></li>-->
+                <!--                            <li class="dropdown-header">tutorials</li>-->
+                <!--                            <li><a href="#"> c++</a></li>-->
+                <!--                            <li><a href="#"> java</a></li>-->
+                <!--                        </ul>-->
+                <!--                </li>-->
                 <li><?= anchor('logout', _('Wyloguj')); ?></li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="nav-margin"></div>
+
+<?php if (!empty($alert)) : ?>
+    <script>
+        $(document).ready(function () {
+            $('body').append('<?= $alert; ?>');
+            $('#alert_box').fadeIn().delay(2000).fadeOut();
+
+            $('#alert_box .close').click(function(e) {
+                e.preventDefault();
+                $(this).closest('#alert_box').fadeOut();
+            });
+        });
+    </script>
+<?php endif; ?>

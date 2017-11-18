@@ -46,6 +46,7 @@ class Users extends Auth_Controller
 
         $user_id = $user->save_user($post);
 
+        alert('Zapisano informacje o użytkowniku', SUCCESS);
         $this->redirect($user_id);
     }
 
@@ -56,6 +57,9 @@ class Users extends Auth_Controller
 
         if(empty($user->admin) && ($current_user->id !== $user->id) && !empty($current_user->admin)) {
             $user->delete();
+            alert('Usunięto uzytkownika', NOTICE);
+        } else {
+            alert('Nie można usunąć użytkownika', ERROR);
         }
 
         $this->redirect();

@@ -28,6 +28,7 @@ class MY_Controller extends CI_Controller
 
     protected function render($the_view = null, $template = 'public_master')
     {
+        $this->data['alert'] = $this->render_alert();
         $this->data['menu'] = $this->render_menu();
         if ($template == 'json' || $this->input->is_ajax_request()) {
             header('Content-Type: application/json');
@@ -39,6 +40,39 @@ class MY_Controller extends CI_Controller
             $this->load->view('templates/styles');
             $this->data['the_view_content'] = (is_null($the_view)) ? '' : $this->load->view($the_view, $this->data, true);
             $this->load->view('templates/' . $template . '_view', $this->data);
+        }
+    }
+
+    private function render_alert()
+    {
+        if(!empty($this->session->message)) {
+            $message = $this->session->message;
+
+            switch($message['type']) {
+                case SUCCESS:
+                    $class = 'success';
+                    $header = _('Sukces');
+                    break;
+                case WARNING:
+                    $class = 'warning';
+                    $header = _('Ostrzeżenie');
+                    break;
+                case ERROR:
+                    $class = 'error';
+                    $header = _('Błąd');
+                    break;
+                default:
+                    $class = 'notice';
+                    $header = _('Informacja');
+                    break;
+            }
+
+            $html = '<div id="alert_box" class="alert '.$class.'">'
+            .'<button type="button" class="close">×</button>'
+            .'<h4>'.$header.'!</h4>'
+            .'<p>'.$message['text'].'</p></div>';
+            unset($_SESSION['message']);
+            return $html;
         }
     }
 

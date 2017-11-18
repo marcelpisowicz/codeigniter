@@ -42,3 +42,11 @@ if (!function_exists('arr_form')) {
         return array_merge([0 => '-- Wybierz --'], $array);
     }
 }
+
+if (!function_exists('alert')) {
+
+    function alert($message, $type = null)
+    {
+        $_SESSION['message'] = ['text' => _($message), 'type' => $type];
+    }
+}

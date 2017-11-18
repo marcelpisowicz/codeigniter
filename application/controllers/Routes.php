@@ -93,13 +93,14 @@ class Routes extends Auth_Controller
                 Route_Point::create($values);
             }
         }
-
+        alert('Zapisano informacje o trasie', SUCCESS);
         $this->redirect($route_id);
     }
 
     public function delete($id)
     {
         Route::destroy($id);
+        alert('Usunięto trasę', NOTICE);
         $this->redirect();
     }
 }

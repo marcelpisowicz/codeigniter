@@ -89,3 +89,8 @@ defined('HASH_LENGTH')         OR define('HASH_LENGTH', 32); // hash length
 defined('SALT_LENGTH')         OR define('SALT_LENGTH', 16); // hash length
 defined('HASH_ALGORITHM')      OR define('HASH_ALGORITHM', 'sha256'); // hash algorithm
 defined('MAP_API_KEY')         OR define('MAP_API_KEY', 'AIzaSyBQcFe5Z_X6nK6wjqbTPzRDB5LZbX9e0IQ');
+defined('SUCCESS')             OR define('SUCCESS', '1');
+defined('NOTICE')              OR define('NOTICE', '2');
+defined('WARNING')             OR define('WARNING', '3');
+defined('ERROR')               OR define('ERROR', '4');
+

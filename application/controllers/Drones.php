@@ -30,9 +30,7 @@ class Drones extends Auth_Controller
     public function details($id = null)
     {
         $drone = Drone::findOrNew($id);
-
         $this->model($drone);
-//        $this->data['drone'] = empty($model) ? null : $model;
         $this->data['id'] = $id;
         $this->data['drone_types'] = arr_form($drone->getTypes());
 
@@ -55,7 +53,7 @@ class Drones extends Auth_Controller
         $drone->type = (int)$post['type'];
         $drone->save();
         $drone_id = $drone->getKey();
-
+        alert('Zapisano informacje o urządzeniu', SUCCESS);
         Drone::checkDetailsTable($drone_id);
         $this->redirect($drone_id);
     }
@@ -64,6 +62,7 @@ class Drones extends Auth_Controller
     {
         Drone::destroy($id);
         Drone::checkDetailsTable($id);
+        alert('Usunięto urządzenie', NOTICE);
         $this->redirect();
     }
 }
