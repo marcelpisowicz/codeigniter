@@ -12,13 +12,13 @@ class RoutesTable extends AbstractMigration
 
         $routes = $this->table('routes');
         $routes->addColumn('name', 'string', ['limit' => 64])
-            ->addColumn('creator_user_id', 'integer')
+            ->addColumn('user_id', 'integer', ['null' => true])
             ->addColumn('active', 'boolean', ['default' => true])
             ->addColumn('description', 'text', ['null' => true])
             ->addColumn('updated_at', 'datetime', ['null' => true])
             ->addColumn('created_at', 'datetime', ['null' => true])
             ->addIndex(['name'], ['unique' => true])
-            ->addForeignKey('creator_user_id', 'users', 'id', ['delete'=> 'RESTRICT', 'update'=> 'NO_ACTION'])
+            ->addForeignKey('user_id', 'users', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
             ->save();
 
         if ($this->hasTable('routes_points')) {

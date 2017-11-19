@@ -25,7 +25,7 @@ class Routes extends Auth_Controller
     public function details($id = null)
     {
         $route = Route::findOrNew($id);
-        $creator = User::find($route['creator_user_id']);
+        $creator = User::find($route['user_id']);
 
         $this->model($route);
         $this->data['id'] = $id;
@@ -70,7 +70,7 @@ class Routes extends Auth_Controller
 
         $route = Route::findOrNew($route_id);
         $route->name = (string)$post['name'];
-        $route->creator_user_id = $user_id;
+        $route->user_id = $user_id;
         $route->description = $post['description'];
         $route->active = (int)isset($post['active']);
         $route->save();

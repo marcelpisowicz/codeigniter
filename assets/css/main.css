@@ -140,7 +140,6 @@ body {
 
 .datatable {
     border-collapse: separate;
-    background: #fff;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -161,6 +160,14 @@ body {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     font-weight: 400;
+    text-align: left;
+    padding: 16px;
+}
+
+.datatable thead {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
     color: #fff;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
     text-align: left;
@@ -173,13 +180,13 @@ body {
     border-top: 1px solid #36596b;
 }
 
-.datatable thead th:first-child {
+.datatable thead tr:first-child th:first-child {
     -moz-border-top-right-radius: 5px;
     -webkit-border-top-left-radius: 5px;
     border-top-left-radius: 5px;
 }
 
-.datatable thead th:last-child {
+.datatable thead tr:first-child th:last-child {
     -moz-border-top-right-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     border-top-right-radius: 5px;
@@ -194,8 +201,12 @@ body {
     border-bottom: 1px solid #e0e0e0;
 }
 
-.datatable tbody tr:nth-child(2n) {
-    background: #f7f7f7;
+.datatable tbody tr:nth-child(even) td {
+    background: whitesmoke;
+}
+
+.datatable tbody tr:nth-child(odd) td {
+    background: white;
 }
 
 .datatable tbody tr:last-child td {
@@ -215,7 +226,7 @@ body {
 }
 
 .datatable tbody:hover > tr:hover td {
-    background-color: #dee5e8;;
+    background-color: #dee5e8;
 }
 
 
@@ -480,4 +491,23 @@ input[type=checkbox]:checked + label
     border-color: #bce8f1;
 }
 
+footer {
+    bottom: 0;
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    background: -webkit-linear-gradient(0deg, #16222A 0%, transparent 90%);
+    background: -moz-linear-gradient(0deg, #16222A 0%, transparent 90%);
+    background: -ms-linear-gradient(0deg, #16222A 0%, transparent 90%);
+    background: -o-linear-gradient(0deg, #16222A 0%, transparent 90%);
+    background: linear-gradient(0deg, #16222A 0%, transparent 90%);
+}
+
+footer p {
+    right: 10px;
+    color: #d0d0d0;
+    font-size: 12px;
+    bottom: 0px;
+    position: absolute;
+}
 

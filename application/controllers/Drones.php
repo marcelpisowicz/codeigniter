@@ -13,8 +13,8 @@ class Drones extends Auth_Controller
         $this->table->add_column(_('Aktywny'), 'active', Drone::getTypes());
 //        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
 //        $this->table->add_action('/home/location', '/assets/icons/location.png');
-        $this->table->add_action('/streaming/index', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
-//        $this->table->add_action('/home/details', '/assets/icons/document.png', 'Details');
+        $this->table->add_action('/drones/streaming', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
+        $this->table->add_action('/drones/scheduler', '/assets/icons/document.png', 'Harmonogram');
 //        $this->table->add_action('/home/analyze', '/assets/icons/analyze.png');
         $this->table->add_action_delete();
         $this->table->add_click();
@@ -65,4 +65,35 @@ class Drones extends Auth_Controller
         alert('Usunięto urządzenie', NOTICE);
         $this->redirect();
     }
+
+    public function streaming($id)
+    {
+        $drone = Drone::find($id);
+        if(!empty($drone)) {
+            $this->data['source'] = $drone->stream_source;
+        }
+
+        $this->render('drones/streaming_view', null);
+    }
+
+    public function ajax_get_calendar($id)
+    {
+        $post = $this->input->post();
+        $this->load->library('MyCalendar');
+        $phpCalendar = new MyCalendar($post['year'], $post['month']);
+        echo $phpCalendar->getCalendarHTML();
+    }
+
+    public function scheduler($id)
+    {
+        $this->load->library('MyCalendar');
+        $this->add_menu_return();
+
+        $phpCalendar = new MyCalendar();
+        $this->data['calendar'] = $phpCalendar->getCalendarHTML();
+        $this->data['id'] = $id;
+
+        $this->render('drones/scheduler_view');
+    }
+
 }

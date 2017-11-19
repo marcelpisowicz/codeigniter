@@ -117,7 +117,7 @@ class CI_Table
 
     public function add_action_delete()
     {
-        $this->add_action(get_path() . '/delete', '/assets/icons/trash.png');
+        $this->add_action(get_path() . '/delete', '/assets/icons/trash.png', _('Usuń'));
     }
 
     public function add_action($url, $icon, $name = null, $new_window = null, $param = null, $style = null)
@@ -339,7 +339,7 @@ class CI_Table
                     $out .= '<td style="text-align:center;width: ' . (count($this->actions) * 35) . 'px">';
 
                     foreach ($this->actions as $action) {
-                        $url = $action['url'] . '/' . $row[$action['param']]['data'];
+                        $url = $action['url'] . '/' . $row['id'];
                         $target = !empty($action['new_window']) ? 'onclick="window.open(\'' . $url . '\', \'newwindow\', \'width=' . $action['new_window'][0] . ',height=' . $action['new_window'][1] . '\');" ' : 'href="' . $url . '"';
                         $out .= '<a ' . $target . '><img src="' . $action['icon'] . '" class="action_button" title="' . $action['name'] . '" style="' . $action['style'] . '"></a>';
                     }
