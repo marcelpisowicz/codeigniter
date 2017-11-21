@@ -309,7 +309,6 @@ class CI_Table
 
             $i = 1;
             $headings = array_keys($this->columns);
-
             foreach ($table_data as $row) {
 
                 if (!is_array($row)) {
@@ -322,12 +321,10 @@ class CI_Table
                 $out .= '<tr data-id="' . $row['id'] . '">' . $this->newline;
                 $temp = null;
 
-                foreach ($row as $cell_key => $cell) {
-                    if (!in_array($cell_key, $headings)) {
-                        continue;
-                    }
+                foreach ($headings as $heading) {
 
-                    $name_map = $this->columns[$cell_key]['name_map'];
+                    $cell = $row[$heading];
+                    $name_map = $this->columns[$heading]['name_map'];
                     if(!empty($name_map) && isset($name_map[$cell])) {
                         $cell = $name_map[$cell];
                     }

@@ -15,7 +15,7 @@
     <tbody>
     <tr>
         <td><?= _('Dron') ?></td>
-        <td colspan="2"><?= form_input(null, $drone['id_code'], 'readonly'); ?></td>
+        <td colspan="2"><?= form_input(null, $drone['name'], 'readonly'); ?></td>
     </tr>
     <tr>
         <td><?= _('Trasa') ?></td>

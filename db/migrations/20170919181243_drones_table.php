@@ -11,12 +11,15 @@ class DronesTable extends AbstractMigration
         }
 
         $drones = $this->table('drone');
-        $drones->addColumn('id_code', 'string', ['limit' => 32])
+        $drones->addColumn('name', 'string', ['limit' => 32])
+            ->addColumn('serial_number', 'string', ['limit' => 64, 'null' => true])
             ->addColumn('model', 'string', ['limit' => 64, 'null' => true])
             ->addColumn('stream_source', 'string', ['null' => true])
+            ->addColumn('description', 'text', ['null' => true])
             ->addColumn('active', 'boolean', ['default' => true])
             ->addColumn('type', 'integer')
-            ->addIndex(['id_code'], ['unique' => true])
+            ->addIndex(['serial_number'], ['unique' => true])
+            ->addIndex(['name'], ['unique' => true])
             ->save();
     }
 

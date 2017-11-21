@@ -7,10 +7,10 @@ class Drones extends Auth_Controller
     public function index()
     {
         $drones = Drone_model::all();
-        $this->table->add_column(_('Identyfikator'), 'id_code');
-        $this->table->add_column(_('Model'), 'model');
-        $this->table->add_column(_('Typ urządzenia'), 'type');
-        $this->table->add_column(_('Aktywny'), 'active', Drone_model::getTypes());
+        $this->table->add_column(_('Nazwa'), 'name');
+        $this->table->add_column(_('Numer seryjny'), 'serial_number');
+        $this->table->add_column(_('Typ urządzenia'), 'type', Drone_model::getTypes());
+        $this->table->add_column(_('Aktywny'), 'active', true);
 //        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
 //        $this->table->add_action('/home/location', '/assets/icons/location.png');
         $this->table->add_action('/drones/streaming', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
@@ -45,10 +45,12 @@ class Drones extends Auth_Controller
         $post = $this->input->post();
         $drone_id = (int)$post['id'];
         $drone = Drone_model::findOrNew($drone_id);
-        $drone->id_code = $post['id_code'];
+        $drone->name = $post['name'];
+        $drone->serial_number = $post['serial_number'];
         $drone->model = $post['model'];
         $drone->stream_source = $post['stream_source'];
         $drone->active = (int)isset($post['active']);
+        $drone->description = $post['description'];
         $drone->type = (int)$post['type'];
         $drone->save();
         $drone_id = $drone->getKey();

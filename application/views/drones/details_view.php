@@ -10,8 +10,12 @@
     </thead>
     <tbody>
     <tr>
-        <td><?= _('Identyfikator drona') ?></td>
-        <td><?= form_input('id_code', $model['id_code']); ?></td>
+        <td><?= _('Nazwa') ?></td>
+        <td><?= form_input('name', $model['name']); ?></td>
+    </tr>
+    <tr>
+        <td><?= _('Numer seryjny') ?></td>
+        <td><?= form_input('serial_number', $model['serial_number']); ?></td>
     </tr>
     <tr>
         <td><?= _('Model') ?></td>
@@ -28,6 +32,10 @@
     <tr>
         <td><?= _('Aktywny')?></td>
         <td><?= form_checkbox('active', $model['active']); ?></td>
+    </tr>
+    <tr>
+        <td><?= _('Aktywny')?></td>
+        <td><?= form_textarea('description', $model['description']); ?></td>
     </tr>
     </tbody>
 </table>

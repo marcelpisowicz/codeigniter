@@ -20,11 +20,11 @@ class SchedulerTable extends AbstractMigration
             ->addForeignKey('user_id', 'users', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
             ->save();
 
-        if ($this->hasTable('calendar_schedule')) {
-            $this->dropTable('calendar_schedule');
+        if ($this->hasTable('schedule')) {
+            $this->dropTable('schedule');
         }
 
-        $drones = $this->table('calendar_schedule');
+        $drones = $this->table('schedule');
         $drones->addColumn('route_id', 'integer')
             ->addColumn('drone_id', 'integer')
             ->addColumn('user_id', 'integer', ['null' => true])

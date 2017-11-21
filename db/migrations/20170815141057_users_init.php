@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class InitMigration extends AbstractMigration
+class UsersInit extends AbstractMigration
 {
     public function up()
     {
@@ -11,10 +11,10 @@ class InitMigration extends AbstractMigration
         }
 
         $users = $this->table('users');
-        $users->addColumn('username', 'string', ['limit' => 20])
+        $users->addColumn('username', 'string', ['limit' => 32])
             ->addColumn('password', 'string', ['limit' => 32])
             ->addColumn('salt', 'string', ['limit' => 16])
-            ->addColumn('email', 'string', ['limit' => 100])
+            ->addColumn('email', 'string', ['limit' => 128])
             ->addColumn('ip_address', 'string', ['limit' => 16])
             ->addColumn('created', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated', 'datetime', ['null' => true])
@@ -23,17 +23,6 @@ class InitMigration extends AbstractMigration
             ->addColumn('active', 'boolean', ['default' => false])
             ->addColumn('admin', 'boolean', ['default' => false])
             ->addIndex(['username', 'email'], ['unique' => true])
-            ->save();
-
-        if ($this->hasTable('login_attempts')) {
-            $this->dropTable('login_attempts');
-        }
-
-        $login_attempts = $this->table('login_attempts');
-        $login_attempts->addColumn('ip_address', 'string', ['limit' => 16])
-            ->addColumn('login', 'string', ['limit' => 20])
-            ->addColumn('time', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
-            ->addIndex(['id'], ['unique' => true])
             ->save();
 
         $singleRow = [

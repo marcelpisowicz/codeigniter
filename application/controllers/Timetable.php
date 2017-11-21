@@ -7,7 +7,7 @@ class Timetable extends Auth_Controller
     public function index($id)
     {
         $drone = Drone_model::find($id);
-        $scheduler = $this->db->get_where('calendar_schedule', ['drone_id' => $id])->result_array();
+        $scheduler = $this->db->get_where('schedule', ['drone_id' => $id])->result_array();
 
         $this->table->add_column(_('Dron'), 'drone_id');
         $this->table->add_column(_('User'), 'user_id');
@@ -16,7 +16,7 @@ class Timetable extends Auth_Controller
 
         $this->add_menu_return('/drones');
         $this->add_menu_new('/timetable/details/'.$id);
-        $this->add_header($drone->id_code);
+        $this->add_header($drone->name);
         $this->add_description(_('Harmonogram lotów'));
 
         $this->data['table'] = $this->table->generate($scheduler);
@@ -41,7 +41,7 @@ class Timetable extends Auth_Controller
         $this->model($scheduler);
         $this->model($drone, 'drone');
 
-        $this->add_header($drone->id_code);
+        $this->add_header($drone->name);
         $this->add_description(_('Szczegóły lotu'));
 
         $this->add_menu_return('/'.$this->class.'/index/'.$id);
