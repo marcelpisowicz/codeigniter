@@ -6,11 +6,11 @@ class RoutesTable extends AbstractMigration
 {
     public function up()
     {
-        if ($this->hasTable('routes')) {
-            $this->dropTable('routes');
+        if ($this->hasTable('route')) {
+            $this->dropTable('route');
         }
 
-        $routes = $this->table('routes');
+        $routes = $this->table('route');
         $routes->addColumn('name', 'string', ['limit' => 64])
             ->addColumn('user_id', 'integer', ['null' => true])
             ->addColumn('active', 'boolean', ['default' => true])
@@ -21,11 +21,11 @@ class RoutesTable extends AbstractMigration
             ->addForeignKey('user_id', 'users', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
             ->save();
 
-        if ($this->hasTable('routes_points')) {
-            $this->dropTable('routes_points');
+        if ($this->hasTable('route_point')) {
+            $this->dropTable('route_point');
         }
 
-        $routes = $this->table('routes_points');
+        $routes = $this->table('route_point');
         $routes->addColumn('route_id', 'integer')
             ->addColumn('order', 'integer')
             ->addColumn('latitude', 'decimal', ['precision' => 15, 'scale' => 12, 'signed' => false])

@@ -3,7 +3,7 @@
 <?= form_open(); ?>
 <?= form_hidden('id', $id); ?>
 <?= form_hidden('previous_email', $model['email']); ?>
-<table id="details_table">
+<table class="details_table">
     <thead>
     <tr>
         <th colspan="2"><?= _('Informacje podstawowe') ?></th>

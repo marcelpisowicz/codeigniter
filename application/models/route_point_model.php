@@ -2,8 +2,8 @@
 
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Route_Point extends Eloquent {
-    public $timestamps = false;
-    protected $table = "routes_points";
+class Route_point_model extends Eloquent {
+
+    protected $table = "route_point";
     protected $fillable = ['route_id', 'order', 'latitude', 'longitude'];
 }

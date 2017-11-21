@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
 <?= form_open(); ?>
-<?= form_hidden('id', $id); ?>
-<table id="details_table">
+<?= form_hidden('id', $model['id']); ?>
+<table class="details_table">
     <thead>
     <tr>
         <th colspan="2"><?= _('Informacje podstawowe') ?></th>

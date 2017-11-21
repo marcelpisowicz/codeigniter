@@ -2,7 +2,7 @@
 
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-class User extends Eloquent {
+class User_model extends Eloquent {
     public $timestamps = false;
     protected $table = "users";
 

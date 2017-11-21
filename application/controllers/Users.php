@@ -6,7 +6,7 @@ class Users extends Auth_Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User_model::all();
         $this->table->add_column(_('Nazwa użytkownika') ,'username');
         $this->table->add_column(_('Email') ,'email');
         $this->table->add_column(_('Ostatnie logowanie') ,'last_login');
@@ -23,8 +23,8 @@ class Users extends Auth_Controller
 
     public function details($id = null)
     {
-        $user = User::findOrNew($id);
-        $current_user = User::find($this->session->userdata('user_id'));
+        $user = User_model::findOrNew($id);
+        $current_user = User_model::find($this->session->userdata('user_id'));
 
         $this->model($user);
         $this->data['id'] = $id;
@@ -42,7 +42,7 @@ class Users extends Auth_Controller
     {
         $post = $this->input->post();
         $user_id = (int)$post['id'];
-        $user = User::findOrNew($user_id);
+        $user = User_model::findOrNew($user_id);
 
         $user_id = $user->save_user($post);
 

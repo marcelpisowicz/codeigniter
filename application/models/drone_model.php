@@ -3,9 +3,9 @@
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Capsule\Manager as DB;
 
-class Drone extends Eloquent {
+class Drone_model extends Eloquent {
     public $timestamps = false;
-    protected $table = "drones";
+    protected $table = "drone";
 
     private static $drone_types = [
         1 => 'Wielowirnikowiec',
@@ -16,7 +16,7 @@ class Drone extends Eloquent {
     {
         if(!empty($id)) {
 
-            $drone = Drone::find($id);
+            $drone = Drone_model::find($id);
             $table = DB::table('information_schema.tables')
                 ->where('TABLE_SCHEMA', '=', 'details')
                 ->where('TABLE_NAME', '=', 'uav_'.$id)
@@ -32,6 +32,6 @@ class Drone extends Eloquent {
 
     public static function getTypes()
     {
-        return Drone::$drone_types;
+        return Drone_model::$drone_types;
     }
 }

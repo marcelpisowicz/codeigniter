@@ -33,7 +33,7 @@
 <!--<script src="<?= base_url('assets/js/google_maps.js') ?>"></script>-->
 
 <?= form_open(); ?>
-<?= form_hidden('id', $id); ?>
+<?= form_hidden('id', $model['id']); ?>
 <?= form_hidden('route', null); ?>
 
 <table id="route_details">

@@ -6,7 +6,7 @@ class Routes extends Auth_Controller
 
     public function index()
     {
-        $routes = Route::all();
+        $routes = Route_model::all();
         $this->data['routes'] = $routes;
         $this->table->add_column(_('Nazwa'), 'name');
         $this->table->add_column(_('Opis'), 'description');
@@ -24,14 +24,13 @@ class Routes extends Auth_Controller
 
     public function details($id = null)
     {
-        $route = Route::findOrNew($id);
-        $creator = User::find($route['user_id']);
+        $route = Route_model::findOrNew($id);
+        $creator = User_model::find($route['user_id']);
 
         $this->model($route);
-        $this->data['id'] = $id;
         $this->data['creator'] = $creator->toArray();
 
-        $route_points = Route_Point::where('route_id', '=', $id)->get();
+        $route_points = Route_point_model::where('route_id', '=', $id)->get();
         $points = [];
 
         foreach ($route_points as $route_point) {
@@ -68,7 +67,7 @@ class Routes extends Auth_Controller
         $route_id = (int)$post['id'];
         $user_id = $this->session->get_userdata()['user_id'];
 
-        $route = Route::findOrNew($route_id);
+        $route = Route_model::findOrNew($route_id);
         $route->name = (string)$post['name'];
         $route->user_id = $user_id;
         $route->description = $post['description'];
@@ -80,7 +79,7 @@ class Routes extends Auth_Controller
 
         if(!empty($points)) {
 
-            Route_Point::where('route_id', $route_id)->delete();
+            Route_point_model::where('route_id', $route_id)->delete();
 
             foreach ($points as $key => $point) {
                 $values = [
@@ -90,7 +89,7 @@ class Routes extends Auth_Controller
                     'longitude' => $point['lng']
                 ];
 
-                Route_Point::create($values);
+                Route_point_model::create($values);
             }
         }
         alert('Zapisano informacje o trasie', SUCCESS);
@@ -99,7 +98,7 @@ class Routes extends Auth_Controller
 
     public function delete($id)
     {
-        Route::destroy($id);
+        Route_model::destroy($id);
         alert('Usunięto trasę', NOTICE);
         $this->redirect();
     }

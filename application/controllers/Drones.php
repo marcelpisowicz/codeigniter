@@ -6,16 +6,16 @@ class Drones extends Auth_Controller
 
     public function index()
     {
-        $drones = Drone::all();
+        $drones = Drone_model::all();
         $this->table->add_column(_('Identyfikator'), 'id_code');
         $this->table->add_column(_('Model'), 'model');
         $this->table->add_column(_('Typ urządzenia'), 'type');
-        $this->table->add_column(_('Aktywny'), 'active', Drone::getTypes());
+        $this->table->add_column(_('Aktywny'), 'active', Drone_model::getTypes());
 //        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
 //        $this->table->add_action('/home/location', '/assets/icons/location.png');
         $this->table->add_action('/drones/streaming', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
-        $this->table->add_action('/drones/scheduler', '/assets/icons/document.png', 'Harmonogram');
-//        $this->table->add_action('/home/analyze', '/assets/icons/analyze.png');
+        $this->table->add_action('/drones/calendar', '/assets/icons/calendar.png', 'Kalendarz');
+        $this->table->add_action('/timetable/index', '/assets/icons/document.png', 'Rozkład');
         $this->table->add_action_delete();
         $this->table->add_click();
 
@@ -29,9 +29,8 @@ class Drones extends Auth_Controller
 
     public function details($id = null)
     {
-        $drone = Drone::findOrNew($id);
+        $drone = Drone_model::findOrNew($id);
         $this->model($drone);
-        $this->data['id'] = $id;
         $this->data['drone_types'] = arr_form($drone->getTypes());
 
         $this->add_menu_return();
@@ -45,7 +44,7 @@ class Drones extends Auth_Controller
     {
         $post = $this->input->post();
         $drone_id = (int)$post['id'];
-        $drone = Drone::findOrNew($drone_id);
+        $drone = Drone_model::findOrNew($drone_id);
         $drone->id_code = $post['id_code'];
         $drone->model = $post['model'];
         $drone->stream_source = $post['stream_source'];
@@ -54,21 +53,21 @@ class Drones extends Auth_Controller
         $drone->save();
         $drone_id = $drone->getKey();
         alert('Zapisano informacje o urządzeniu', SUCCESS);
-        Drone::checkDetailsTable($drone_id);
+        Drone_model::checkDetailsTable($drone_id);
         $this->redirect($drone_id);
     }
 
     public function delete($id)
     {
-        Drone::destroy($id);
-        Drone::checkDetailsTable($id);
+        Drone_model::destroy($id);
+        Drone_model::checkDetailsTable($id);
         alert('Usunięto urządzenie', NOTICE);
         $this->redirect();
     }
 
     public function streaming($id)
     {
-        $drone = Drone::find($id);
+        $drone = Drone_model::find($id);
         if(!empty($drone)) {
             $this->data['source'] = $drone->stream_source;
         }
@@ -84,7 +83,7 @@ class Drones extends Auth_Controller
         echo $phpCalendar->getCalendarHTML();
     }
 
-    public function scheduler($id)
+    public function calendar($id)
     {
         $this->load->library('MyCalendar');
         $this->add_menu_return();
@@ -93,7 +92,7 @@ class Drones extends Auth_Controller
         $this->data['calendar'] = $phpCalendar->getCalendarHTML();
         $this->data['id'] = $id;
 
-        $this->render('drones/scheduler_view');
+        $this->render('drones/calendar_view');
     }
 
 }
