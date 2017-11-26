@@ -51,7 +51,7 @@
     <script>
         $(document).ready(function () {
             $('body').append('<?= $alert; ?>');
-            $('#alert_box').fadeIn().delay(2000).fadeOut();
+            $('#alert_box').fadeIn().delay(5000).fadeOut();
 
             $('#alert_box .close').click(function(e) {
                 e.preventDefault();

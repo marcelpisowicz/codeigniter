@@ -1,46 +1,45 @@
 ###################
-What is CodeIgniter
+Drone Management System
 ###################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Aplikacja webowa do zarządzania flotą dronów patrolujących.
+Oferowane funkcjonalności:
+- Definiowanie tras z wykorzystaniem API Google Maps.
+- Tworzenie harmonogramów lotów w oparciu o CRONa
+- Nadzorowanie statusu urządzeń
+- Streaming wideo w czasie rzeczywistym z urządzeń
+- Zarządzanie kontami użytkowników
 
 *******************
-Release Information
+Wykorzystane techonologie
 *******************
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+- `CodeIgniter <https://codeigniter.com/>`_ główny framework aplikacji
+- `Eloquent <https://laravel.com/docs/4.2/eloquent/>`_ mapowanie obiektowo-relacyjne
+- `Ion auth <http://benedmunds.com/ion_auth/>`_ uwierzytelnianie użytkowników
+- `Phinx <http://docs.phinx.org/en/latest/migrations.html/>`_ migracje bazy danych
+- `Google Maps API <https://developers.google.com/maps/>`_ obsługa mapy
+- `Composer <https://getcomposer.org/>`_ system zarządzania pakietami PHP
+- `Katalon <https://www.katalon.com/>`_ środowisko do testów automatycznych
+- `jQuery <https://jquery.com/>`_ biblioteka języka JavaScript
+- `Bootstrap <https://getbootstrap.com/>`_ framework języka CSS
+- `MySql <https://www.mysql.com/>`_ system zarządzania bazą danych
 
-**************************
-Changelog and New Features
-**************************
+*******************
+Testy aplikacji
+*******************
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+W repozytorium są zawarte przykładowe testy automatyczne aplikacji
 
 *******************
 Server Requirements
 *******************
 
-PHP version 5.6 or newer is recommended.
+PHP version 7.0 or newer is recommended.
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
+It should work on 5.6 as well, but we strongly advise you NOT to run
 such old versions of PHP, because of potential security and performance
 issues, as well as missing features.
-
-************
-Installation
-************
-
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
 
 *******
 License
@@ -48,23 +47,4 @@ License
 
 Please see the `license
 agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
-
-*********
-Resources
-*********
-
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community IRC <https://webchat.freenode.net/?channels=%23codeigniter>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+@author Marcel Pisowicz
