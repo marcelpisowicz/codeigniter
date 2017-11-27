@@ -126,6 +126,7 @@ body {
 }
 
 #content {
+    margin-bottom: 30px;
     width: 100%;
     padding-left: 80px;
     padding-right: 80px;
@@ -498,19 +499,13 @@ input[type=checkbox]:checked + label
 }
 
 footer {
-    bottom: 0;
     position: absolute;
-    height: 50px;
     width: 100%;
-    background: -webkit-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: -moz-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: -ms-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: -o-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: linear-gradient(0deg, #16222A 0%, transparent 90%);
 }
 
 footer p {
     right: 10px;
+    margin-bottom: 1px;
     color: #d0d0d0;
     font-size: 12px;
     bottom: 0px;

@@ -28,7 +28,7 @@ class Routes extends Auth_Controller
         $creator = User_model::find($route['user_id']);
 
         $this->model($route);
-        $this->data['creator'] = $creator->toArray();
+        $this->model($creator, 'creator');
 
         $route_points = Route_point_model::where('route_id', '=', $id)->get();
         $points = [];
