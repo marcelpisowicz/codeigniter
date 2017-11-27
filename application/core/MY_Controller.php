@@ -96,9 +96,6 @@ class MY_Controller extends CI_Controller
 
     public function add_menu($url, $icon, $name = null, $class = null)
     {
-        if(empty($class)) {
-            $class = strtolower(str_replace(' ', '_', $name));
-        }
         $this->menu_items[] = [
             'url' => $url,
             'icon' => $icon,

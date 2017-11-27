@@ -3,7 +3,7 @@ $this->load->view('templates/_parts/auth_master_header_view'); ?>
 
     <div id="left_menu">
         <?php foreach ($menu as $item) : ?>
-            <a <?= !empty($item['url']) ? 'href="'.$item['url'].'"' : '' ?> class="new_button <?= $item['class'] ?>" title="<?= _($item['name']) ?>">
+            <a <?= empty($item['url']) ? '' : 'href="'.$item['url'].'"' ?> class="new_button <?= $item['class'] ?>" title="<?= _($item['name']) ?>">
                 <img class="left_menu_item" src="<?= $item['icon'] ?>">
             </a>
         <?php endforeach; ?>

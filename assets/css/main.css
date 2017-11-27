@@ -126,6 +126,7 @@ body {
 }
 
 #content {
+    margin-bottom: 30px;
     width: 100%;
     padding-left: 80px;
     padding-right: 80px;
@@ -498,11 +499,13 @@ input[type=checkbox]:checked + label
 }
 
 footer {
-    display: none;
+    position: absolute;
+    width: 100%;
 }
 
 footer p {
     right: 10px;
+    margin-bottom: 1px;
     color: #d0d0d0;
     font-size: 12px;
     bottom: 0px;

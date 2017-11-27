@@ -100,7 +100,7 @@
         map.addListener('click', addLatLng);
 
         //Rysowanie obecnej trasy, jesli istnieje
-        <?php if(!empty($id) && isset($route_points)) : ?>
+        <?php if(!empty($model['id']) && isset($route_points)) : ?>
         var currentRoute = <?= $route_points ?>;
         var polylineRoute = new google.maps.Polyline({
             path: currentRoute,
