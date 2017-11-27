@@ -14,7 +14,7 @@
         <td><?= form_input('name', $model['name']); ?></td>
     </tr>
     <tr>
-        <td><?= _('Numer seryjny') ?></td>
+        <td><?= _('Numer rejestracyjny') ?></td>
         <td><?= form_input('serial_number', $model['serial_number']); ?></td>
     </tr>
     <tr>
@@ -23,7 +23,7 @@
     </tr>
     <tr>
         <td><?= _('Typ') ?></td>
-        <td><?= form_dropdown('type', $drone_types, $model['type']); ?></td>
+        <td><?= form_dropdown('type', $vehicle_types, $model['type']); ?></td>
     </tr>
     <tr>
         <td><?= _('Źródło streama')?></td>

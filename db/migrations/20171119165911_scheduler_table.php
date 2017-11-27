@@ -10,12 +10,12 @@ class SchedulerTable extends AbstractMigration
             $this->dropTable('calendar');
         }
 
-        $drones = $this->table('calendar');
-        $drones->addColumn('route_id', 'integer')
-            ->addColumn('drone_id', 'integer')
+        $vehicles = $this->table('calendar');
+        $vehicles->addColumn('route_id', 'integer')
+            ->addColumn('vehicle_id', 'integer')
             ->addColumn('user_id', 'integer', ['null' => true])
             ->addColumn('datetime', 'datetime')
-            ->addForeignKey('drone_id', 'drone', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+            ->addForeignKey('vehicle_id', 'vehicle', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
             ->addForeignKey('route_id', 'route', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
             ->addForeignKey('user_id', 'users', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
             ->save();
@@ -24,9 +24,9 @@ class SchedulerTable extends AbstractMigration
             $this->dropTable('schedule');
         }
 
-        $drones = $this->table('schedule');
-        $drones->addColumn('route_id', 'integer')
-            ->addColumn('drone_id', 'integer')
+        $vehicles = $this->table('schedule');
+        $vehicles->addColumn('route_id', 'integer')
+            ->addColumn('vehicle_id', 'integer')
             ->addColumn('user_id', 'integer', ['null' => true])
             ->addColumn('min', 'integer', ['limit' => 59])
             ->addColumn('hour', 'integer', ['limit' => 23])
@@ -36,7 +36,7 @@ class SchedulerTable extends AbstractMigration
             ->addColumn('created_at', 'datetime', ['null' => true])
             ->addColumn('updated_at', 'datetime', ['null' => true])
             ->addColumn('description', 'text', ['null' => true])
-            ->addForeignKey('drone_id', 'drone', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
+            ->addForeignKey('vehicle_id', 'vehicle', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
             ->addForeignKey('route_id', 'route', 'id', ['delete'=> 'CASCADE', 'update'=> 'NO_ACTION'])
             ->addForeignKey('user_id', 'users', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
             ->save();

@@ -25,7 +25,7 @@
         </a>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/drones"><?= _('Drony') ?></a></li>
+                <li><a href="/vehicles"><?= _('Pojazdy') ?></a></li>
                 <li><a href="/routes"><?= _('Trasy') ?></a></li>
                 <li><a href="/users"><?= _('Użytkownicy') ?></a></li>
                 <!--                <li class="dropdown">-->

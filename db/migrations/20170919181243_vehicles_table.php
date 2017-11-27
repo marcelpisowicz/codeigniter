@@ -2,16 +2,16 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class DronesTable extends AbstractMigration
+class VehiclesTable extends AbstractMigration
 {
     public function up()
     {
-        if ($this->hasTable('drone')) {
-            $this->dropTable('drone');
+        if ($this->hasTable('vehicle')) {
+            $this->dropTable('vehicle');
         }
 
-        $drones = $this->table('drone');
-        $drones->addColumn('name', 'string', ['limit' => 32])
+        $vehicles = $this->table('vehicle');
+        $vehicles->addColumn('name', 'string', ['limit' => 32])
             ->addColumn('serial_number', 'string', ['limit' => 64, 'null' => true])
             ->addColumn('model', 'string', ['limit' => 64, 'null' => true])
             ->addColumn('stream_source', 'string', ['null' => true])

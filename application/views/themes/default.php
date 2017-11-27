@@ -121,7 +121,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <img src="<?php echo base_url(); ?>assets/themes/default/images/logo.png" style="float:left;margin-top:5px;z-index:5" alt="logo"/>
+          <img src="<?php echo base_url(); ?>assets/themes/default/images/vehicle_icon.png" style="float:left;margin-top:5px;z-index:5" alt="logo"/>
           <a class="brand" href="<?php echo site_url(); ?>">&nbsp;&nbsp;Your Brand</a>
           <div style="height: 0px;" class="nav-collapse collapse">
             <ul class="nav">

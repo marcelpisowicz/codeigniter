@@ -64,16 +64,17 @@
 
         initMap();
 
-        $('.save').on('click', function(e) {
-            e.preventDefault();
+    });
 
-            var points = JSON.stringify(poly.getPath().getArray());
-            if(points.length > 0) {
-                $("input[name*='route']").val(points);
-            }
-            submitForm();
-        });
+    $('.save').on('click', function(e) {
+        e.preventDefault();
 
+        var points = JSON.stringify(poly.getPath().getArray());
+        alert(points);
+        if(points.length > 0) {
+            $("input[name*='route']").val(points);
+        }
+//            submitForm();
     });
 
     // This example creates an interactive map which constructs a polyline based on

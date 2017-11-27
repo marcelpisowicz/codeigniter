@@ -5,7 +5,7 @@ body {
 }
 
 #page_logo {
-    background: url(/assets/images/logo.png);
+    background: url(/assets/images/vehicle_icon.png);
     background-size: contain;
     height: 40px;
     background-repeat: no-repeat;
@@ -498,15 +498,7 @@ input[type=checkbox]:checked + label
 }
 
 footer {
-    bottom: 0;
-    position: absolute;
-    height: 50px;
-    width: 100%;
-    background: -webkit-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: -moz-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: -ms-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: -o-linear-gradient(0deg, #16222A 0%, transparent 90%);
-    background: linear-gradient(0deg, #16222A 0%, transparent 90%);
+    display: none;
 }
 
 footer p {

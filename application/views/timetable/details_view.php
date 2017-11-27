@@ -5,7 +5,7 @@
     }
 </style>
 <?= form_open(); ?>
-<?= form_hidden('drone_id', $drone['id']); ?>
+<?= form_hidden('vehicle_id', $vehicle['id']); ?>
 <table class="details_table scheduler_table">
     <thead>
     <tr>
@@ -14,8 +14,8 @@
     </thead>
     <tbody>
     <tr>
-        <td><?= _('Dron') ?></td>
-        <td colspan="2"><?= form_input(null, $drone['name'], 'readonly'); ?></td>
+        <td><?= _('Pojazd') ?></td>
+        <td colspan="2"><?= form_input(null, $vehicle['name'], 'readonly'); ?></td>
     </tr>
     <tr>
         <td><?= _('Trasa') ?></td>

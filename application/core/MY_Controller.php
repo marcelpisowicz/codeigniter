@@ -13,8 +13,8 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
         $this->class = $this->router->class;
-        $this->data['page_title'] = 'Drone Management System';
-        $this->data['page_description'] = 'Drone Management System';
+        $this->data['page_title'] = 'Vehicle Management System';
+        $this->data['page_description'] = 'Vehicle Management System';
         $this->data['before_closing_head'] = '';
         $this->data['before_closing_body'] = '';
     }
@@ -145,7 +145,9 @@ class MY_Controller extends CI_Controller
     }
 
     public function model($model, $nazwa = 'model') {
-        $model = $model->toArray();
+        if(!empty($model)) {
+            $model = $model->toArray();
+        }
         $this->data[$nazwa] = empty($model) ? null : $model;
     }
 }

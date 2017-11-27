@@ -27,7 +27,7 @@
     function getCalendar(month,year){
         $("#body-overlay").show();
         $.ajax({
-            url: "/drones/ajax_get_calendar/<?= $id ?>",
+            url: "/vehicles/ajax_get_calendar/<?= $id ?>",
             type: "POST",
             data:'month='+month+'&year='+year,
             success: function(response){
