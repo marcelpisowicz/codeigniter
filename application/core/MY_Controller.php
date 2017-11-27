@@ -94,9 +94,11 @@ class MY_Controller extends CI_Controller
         }
     }
 
-    public function add_menu($url, $icon, $name = null)
+    public function add_menu($url, $icon, $name = null, $class = null)
     {
-        $class = strtolower(str_replace(' ', '_', $name));
+        if(empty($class)) {
+            $class = strtolower(str_replace(' ', '_', $name));
+        }
         $this->menu_items[] = [
             'url' => $url,
             'icon' => $icon,
@@ -120,19 +122,19 @@ class MY_Controller extends CI_Controller
         if(empty($path)) {
             $path = get_path().'/details';
         }
-        $this->add_menu($path, '/assets/icons/new.png', _('Nowy'));
+        $this->add_menu($path, '/assets/icons/new.png', _('Nowy'), 'new');
     }
 
     public function add_menu_save()
     {
-        $this->add_menu('javascript: submitForm()', '/assets/icons/save.png', _('Zapisz'));
+        $this->add_menu('javascript: submitForm()', '/assets/icons/save.png', _('Zapisz'), 'save');
     }
 
     public function add_menu_delete($id)
     {
         if(!empty($id)) {
             $url = '/'.$this->class . '/delete/' . (int)$id;
-            $this->add_menu($url, '/assets/icons/trash.png', _('Usuń'));
+            $this->add_menu($url, '/assets/icons/trash.png', _('Usuń'), 'delete');
         }
     }
 
@@ -141,7 +143,7 @@ class MY_Controller extends CI_Controller
         if(empty($path)) {
             $path = '/'.$this->class;
         }
-        $this->add_menu($path, '/assets/icons/return.png', _('Powrót'));
+        $this->add_menu($path, '/assets/icons/return.png', _('Powrót'), 'return');
     }
 
     public function model($model, $nazwa = 'model') {

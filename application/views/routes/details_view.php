@@ -70,11 +70,10 @@
         e.preventDefault();
 
         var points = JSON.stringify(poly.getPath().getArray());
-        alert(points);
         if(points.length > 0) {
             $("input[name*='route']").val(points);
         }
-//            submitForm();
+            submitForm();
     });
 
     // This example creates an interactive map which constructs a polyline based on
