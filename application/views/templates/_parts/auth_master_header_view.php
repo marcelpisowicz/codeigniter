@@ -51,11 +51,10 @@
     <script>
         $(document).ready(function () {
             $('body').append('<?= $alert; ?>');
-            $('#alert_box').fadeIn().delay(5000).fadeOut();
+            $('#alert_box').fadeIn();
 
-            $('#alert_box .close').click(function(e) {
-                e.preventDefault();
-                $(this).closest('#alert_box').fadeOut();
+            $('#close_alert').click(function(e) {
+                $(this).closest('#alert_box').stop().fadeOut();
             });
         });
     </script>

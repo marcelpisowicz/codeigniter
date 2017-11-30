@@ -2,20 +2,20 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/css/login.css') ?>"/>
 <body class="main">
 <div class="login-center">
-    <?= form_open(); ?>
+    <?= form_open('/register'); ?>
     <div class="front signin_form">
         <p class="login_text"><?= _('Rejestracja nowego konta') ?></p>
 
         <div class="input-group">
-            <?= form_input('username', $username, ['class' => 'form-control'.(empty(form_error('username')) ? '' : ' error-form'), 'placeholder' => 'username']) ?>
+            <?= form_input('username', '', ['class' => 'form-control'.(empty(form_error('username')) ? '' : ' error-form'), 'placeholder' => 'username']) ?>
             <span class="input-group-addon<?= empty(form_error('username')) ? '' : ' error-form' ?>"><i class="glyphicon glyphicon-user"></i></span>
         </div>
         <div class="input-group">
-            <?= form_input('email', $email, ['class' => 'form-control'.(empty(form_error('email')) ? '' : ' error-form'), 'placeholder' => 'email']) ?>
+            <?= form_input('email', '', ['class' => 'form-control'.(empty(form_error('email')) ? '' : ' error-form'), 'placeholder' => 'email']) ?>
             <span class="input-group-addon<?= empty(form_error('email')) ? '' : ' error-form' ?>"><i class="glyphicon glyphicon-envelope"></i></span>
         </div>
         <div class="input-group">
-            <?= form_password('password', $password, ['id' => 'password', 'class' => 'form-control'.(empty(form_error('password')) ? '' : ' error-form'), 'placeholder' => 'password']) ?>
+            <?= form_password('password', '', ['id' => 'password', 'class' => 'form-control'.(empty(form_error('password')) ? '' : ' error-form'), 'placeholder' => 'password']) ?>
             <span class="input-group-addon<?= empty(form_error('password')) ? '' : ' error-form' ?>"><i class="glyphicon glyphicon-lock"></i></span>
         </div>
         <div class="input-group">
@@ -28,9 +28,8 @@
         </div>
 
         <div class="form-group">
-            <p><a href="/user/login" ><?= _('Zaloguj') ?></a></p>
+            <p><a href="/login" ><?= _('Zaloguj') ?></a></p>
         </div>
-
     </div>
 </div>
 </body>

@@ -12,6 +12,7 @@ class MY_Controller extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->helper('function_helper');
         $this->class = $this->router->class;
         $this->data['page_title'] = 'Drone Management System';
         $this->data['page_description'] = 'Drone Management System';
@@ -86,7 +87,7 @@ class MY_Controller extends CI_Controller
             }
 
             $html = '<div id="alert_box" class="alert '.$class.'">'
-            .'<button type="button" class="close">×</button>'
+            .'<button type="button" id="close_alert"></button>'
             .'<h4>'.$header.'!</h4>'
             .'<p>'.$message['text'].'</p></div>';
             unset($_SESSION['message']);

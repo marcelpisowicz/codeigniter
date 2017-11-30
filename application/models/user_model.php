@@ -13,12 +13,14 @@ class User_model extends Eloquent {
         }
 
         $password = $post['password'];
-        $salt = random_salt();
-        $pass = hash_password($password, $salt);
+        if(!empty($password)) {
+            $salt = random_salt();
+            $pass = hash_password($password, $salt);
+            $this->password = $pass;
+            $this->salt = $salt;
+        }
 
         $this->username = $post['username'];
-        $this->password = $pass;
-        $this->salt = $salt;
         $this->email = $post['email'];
         $this->lang = $post['lang'];
         $this->active = (int)isset($post['active']);

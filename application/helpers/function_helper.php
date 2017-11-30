@@ -47,6 +47,6 @@ if (!function_exists('alert')) {
 
     function alert($message, $type = null)
     {
-        $_SESSION['message'] = ['text' => _($message), 'type' => $type];
+        $_SESSION['message'] = ['text' => $message, 'type' => $type];
     }
 }

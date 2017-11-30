@@ -11,7 +11,7 @@ class Users extends Auth_Controller
         $this->table->add_column(_('Email') ,'email');
         $this->table->add_column(_('Ostatnie logowanie') ,'last_login');
         $this->table->add_column(_('Aktywny') ,'active', true);
-
+alert('test', WARNING);
         $this->table->add_click();
 
         $this->add_menu_new();

@@ -1,6 +1,7 @@
 ###################
-Drone Management System
+System zarządzania flotą dronów
 ###################
+@autor Marcel Pisowicz
 
 Aplikacja webowa do zarządzania flotą dronów patrolujących.
 Oferowane funkcjonalności:
@@ -47,4 +48,3 @@ License
 
 Please see the `license
 agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
-@author Marcel Pisowicz

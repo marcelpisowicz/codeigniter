@@ -10,3 +10,16 @@
     <?php echo $before_closing_head;?>
 </head>
 <body>
+
+<?php if (!empty($alert)) : ?>
+    <script>
+        $(document).ready(function () {
+            $('body').append('<?= $alert; ?>');
+            $('#alert_box').fadeIn().delay(5000).fadeOut();
+
+            $('#close_alert').click(function(e) {
+                $(this).closest('#alert_box').stop().fadeOut();
+            });
+        });
+    </script>
+<?php endif; ?>
