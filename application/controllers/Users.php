@@ -11,7 +11,7 @@ class Users extends Auth_Controller
         $this->table->add_column(_('Email') ,'email');
         $this->table->add_column(_('Ostatnie logowanie') ,'last_login');
         $this->table->add_column(_('Aktywny') ,'active', true);
-alert('test', WARNING);
+
         $this->table->add_click();
 
         $this->add_menu_new();
@@ -47,13 +47,13 @@ alert('test', WARNING);
         $user_id = $user->save_user($post);
 
         alert('Zapisano informacje o użytkowniku', SUCCESS);
-        $this->redirect($user_id);
+        $this->redirect_details($user_id);
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
-        $user = User::findOrNew($id);
-        $current_user = User::find($this->session->userdata('user_id'));
+        $user = User_model::find($id);
+        $current_user = User_model::find($this->session->userdata('user_id'));
 
         if(empty($user->admin) && ($current_user->id !== $user->id) && !empty($current_user->admin)) {
             $user->delete();

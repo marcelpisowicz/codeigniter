@@ -34,7 +34,7 @@
         <td><?= form_checkbox('active', $model['active']); ?></td>
     </tr>
     <tr>
-        <td><?= _('Aktywny')?></td>
+        <td><?= _('Uwagi')?></td>
         <td><?= form_textarea('description', $model['description']); ?></td>
     </tr>
     </tbody>

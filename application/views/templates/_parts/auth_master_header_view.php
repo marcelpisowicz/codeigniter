@@ -47,15 +47,21 @@
 </nav>
 <div class="nav-margin"></div>
 
-<?php if (!empty($alert)) : ?>
-    <script>
-        $(document).ready(function () {
-            $('body').append('<?= $alert; ?>');
-            $('#alert_box').fadeIn();
+<script>
+    $(document).ready(function () {
 
-            $('#close_alert').click(function(e) {
-                $(this).closest('#alert_box').stop().fadeOut();
-            });
+        <?php if(!empty($selected_menu)) : ?>
+        $('.navbar-nav li a[href^="/<?= $selected_menu ?>"]').addClass('active');
+        <?php endif; ?>
+
+        <?php if (!empty($alert)) : ?>
+
+        $('body').append('<?= $alert; ?>');
+        $('#alert_box').fadeIn().delay(5000).fadeOut();
+
+        $('#close_alert').click(function (e) {
+            $(this).closest('#alert_box').stop().fadeOut();
         });
-    </script>
-<?php endif; ?>
+        <?php endif; ?>
+    });
+</script>

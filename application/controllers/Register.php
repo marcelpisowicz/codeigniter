@@ -28,16 +28,16 @@ class Register extends MY_Controller
             if ($this->ion_auth->register($username, $password, $email)) {
                 $manual_activation = $this->config->item('manual_activation', 'ion_auth');
                 if($manual_activation) {
-                    alert(_('Konto zostało utworzone. Po aktywowaniu przez administratora będziesz mógł się zalogować.'), NOTICE);
+                    alert('Konto zostało utworzone. Po aktywowaniu przez administratora będziesz mógł się zalogować.', NOTICE);
                 } else {
-                    alert(_('Konto zostało utworzone. Możesz się zalogować.'), SUCCESS);
+                    alert('Konto zostało utworzone. Możesz się zalogować.', SUCCESS);
                 }
                 redirect('login');
             } else {
-                alert(_($this->ion_auth->errors()), ERROR);
+                alert($this->ion_auth->errors(), ERROR);
             }
         } elseif (!empty($this->input->post())) {
-            alert(_('Niewłaściwe dane rejestracji'), ERROR);
+            alert('Niewłaściwe dane rejestracji', ERROR);
         }
 
         $this->render('register/index_view');

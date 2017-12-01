@@ -7,6 +7,7 @@ class MY_Controller extends CI_Controller
     protected $menu_items = [];
     protected $header;
     protected $description;
+    protected $selected_menu;
     protected $class;
 
     function __construct()
@@ -20,17 +21,26 @@ class MY_Controller extends CI_Controller
         $this->data['before_closing_body'] = '';
     }
 
-    protected function redirect($id = null)
+    protected function redirect_details(int $id)
     {
-        if(!empty($id)) {
-            redirect('/' . $this->class . '/details/' . (int)$id);
-        } else {
-            redirect('/' . $this->class);
+        redirect('/' . $this->class . '/details/' . (int)$id);
+    }
+
+    protected function redirect($url = null)
+    {
+        if(empty($url)) {
+            $url = $this->class;
         }
+        redirect('/' . $url);
     }
 
     protected function render($the_view = null, $template = 'public_master')
     {
+        $menu_item = $this->class;
+        if(!empty($this->selected_menu)) {
+            $menu_item = $this->selected_menu;
+        }
+        $this->data['selected_menu'] = $menu_item;
         $this->data['header'] = $this->render_header();
         $this->data['alert'] = $this->render_alert();
         $this->data['menu'] = $this->menu_items;

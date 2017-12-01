@@ -5,6 +5,7 @@
     }
 </style>
 <?= form_open(); ?>
+<?= form_hidden('id', $model['id']); ?>
 <?= form_hidden('drone_id', $drone['id']); ?>
 <table class="details_table scheduler_table">
     <thead>
@@ -43,7 +44,7 @@
     </tr>
     <tr>
         <td><?= _('Minuta') ?></td>
-        <td><?= form_input('minute', $model['minute']); ?></td>
+        <td><?= form_input('min', $model['minute']); ?></td>
         <td>[0 - 59]</td>
     </tr>
     <tr>

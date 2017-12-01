@@ -115,9 +115,12 @@ class CI_Table
         $this->url = $url;
     }
 
-    public function add_action_delete()
+    public function add_action_delete($url = null)
     {
-        $this->add_action(get_path() . '/delete', '/assets/icons/trash.png', _('Usuń'));
+        if(empty($url)) {
+            $url = get_path() . '/delete';
+        }
+        $this->add_action($url, '/assets/icons/trash.png', _('Usuń'));
     }
 
     public function add_action($url, $icon, $name = null, $new_window = null, $param = null, $style = null)
@@ -310,6 +313,7 @@ class CI_Table
             $i = 1;
             $headings = array_keys($this->columns);
             foreach ($table_data as $row) {
+                $row = (array)$row;
 
                 if (!is_array($row)) {
                     break;

@@ -22,7 +22,7 @@ class Routes extends Auth_Controller
         $this->render('routes/index_view');
     }
 
-    public function details($id = null)
+    public function details(int $id = null)
     {
         $route = Route_model::findOrNew($id);
         $creator = User_model::find($route['user_id']);
@@ -93,7 +93,7 @@ class Routes extends Auth_Controller
             }
         }
         alert('Zapisano informacje o trasie', SUCCESS);
-        $this->redirect($route_id);
+        $this->redirect_details($route_id);
     }
 
     public function delete($id)

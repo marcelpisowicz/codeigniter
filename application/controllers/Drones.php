@@ -56,10 +56,10 @@ class Drones extends Auth_Controller
         $drone_id = $drone->getKey();
         alert('Zapisano informacje o urządzeniu', SUCCESS);
         Drone_model::checkDetailsTable($drone_id);
-        $this->redirect($drone_id);
+        $this->redirect_details($drone_id);
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         Drone_model::destroy($id);
         Drone_model::checkDetailsTable($id);
