@@ -155,7 +155,6 @@ class CI_Table
      */
     public function add_click($url = null)
     {
-
         if (empty($url)) {
             $url = get_path() . '/details';
         }

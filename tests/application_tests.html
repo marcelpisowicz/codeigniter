@@ -1,0 +1,1061 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>Engine Test Suite</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Wylogowanie</td></tr>
+</thead>
+<tbody><tr>
+    <td>open</td>
+    <td>http://engine/logout
+        <datalist>
+            <option>http://engine/login</option>
+            <option>http://engine/logout</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Logowanie</td></tr>
+</thead>
+<tbody><tr>
+    <td>open</td>
+    <td>http://engine/login
+        <datalist>
+            <option>http://engine/login</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=username
+        <datalist>
+            <option>name=username</option>
+            <option>//input[@name='username']</option>
+            <option>//input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=username
+        <datalist>
+            <option>name=username</option>
+            <option>//input[@name='username']</option>
+            <option>//input</option>
+        </datalist>
+    </td>
+    <td>admin</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=password
+        <datalist>
+            <option>name=password</option>
+            <option>//input[@name='password']</option>
+            <option>//div[2]/input</option>
+        </datalist>
+    </td>
+    <td>admin</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//label/span/i
+        <datalist>
+            <option>//label/span/i</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//input[@value='Zaloguj']
+        <datalist>
+            <option>//input[@value='Zaloguj']</option>
+            <option>//div[3]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=page_logo
+        <datalist>
+            <option>id=page_logo</option>
+            <option>//div[@id='page_logo']</option>
+            <option>//nav[@id='main_nav']/div/a/div</option>
+            <option>//a/div</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Tworzenie drona</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/drones
+        <datalist>
+            <option>http://engine/drones</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>link=Drony
+        <datalist>
+            <option>link=Drony</option>
+            <option>//a[contains(text(),'Drony')]</option>
+            <option>//nav[@id='main_nav']/div/div/ul/li/a</option>
+            <option>//a[contains(@href, '/drones')]</option>
+            <option>//li/a</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a
+        <datalist>
+            <option>//div[@id='left_menu']/a</option>
+            <option>//a[contains(@href, 'drones/details')]</option>
+            <option>//div[2]/a</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=name
+        <datalist>
+            <option>name=name</option>
+            <option>//input[@name='name']</option>
+            <option>//div[@id='content']/form/table/tbody/tr/td[2]/input</option>
+            <option>//td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=name
+        <datalist>
+            <option>name=name</option>
+            <option>//input[@name='name']</option>
+            <option>//div[@id='content']/form/table/tbody/tr/td[2]/input</option>
+            <option>//td[2]/input</option>
+        </datalist>
+    </td>
+    <td>Testowy dron0x</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=serial_number
+        <datalist>
+            <option>name=serial_number</option>
+            <option>//input[@name='serial_number']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[2]/td[2]/input</option>
+            <option>//tr[2]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>nr_seryjny0x</td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=model
+        <datalist>
+            <option>name=model</option>
+            <option>//input[@name='model']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[3]/td[2]/input</option>
+            <option>//tr[3]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>model</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=select2-type_id-container
+        <datalist>
+            <option>id=select2-type_id-container</option>
+            <option>//span[@id='select2-type_id-container']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[4]/td[2]/span/span/span/span</option>
+            <option>//span/span/span/span</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=stream_source
+        <datalist>
+            <option>name=stream_source</option>
+            <option>//input[@name='stream_source']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[5]/td[2]/input</option>
+            <option>//tr[5]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=stream_source
+        <datalist>
+            <option>name=stream_source</option>
+            <option>//input[@name='stream_source']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[5]/td[2]/input</option>
+            <option>//tr[5]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>url</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='content']/form/table/tbody/tr[6]/td[2]/label
+        <datalist>
+            <option>//div[@id='content']/form/table/tbody/tr[6]/td[2]/label</option>
+            <option>//label</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[7]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[7]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td>uwagi</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a[2]/img
+        <datalist>
+            <option>//div[@id='left_menu']/a[2]/img</option>
+            <option>//a[2]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Edycja drona</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/drones
+        <datalist>
+            <option>http://engine/drones</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>link=Drony
+        <datalist>
+            <option>link=Drony</option>
+            <option>//a[contains(text(),'Drony')]</option>
+            <option>//nav[@id='main_nav']/div/div/ul/li/a</option>
+            <option>//a[contains(@href, '/drones')]</option>
+            <option>//li/a</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='content']/table/tbody/tr/td
+        <datalist>
+            <option>//div[@id='content']/table/tbody/tr/td</option>
+            <option>//td</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=name
+        <datalist>
+            <option>name=name</option>
+            <option>//input[@name='name']</option>
+            <option>//div[@id='content']/form/table/tbody/tr/td[2]/input</option>
+            <option>//td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=name
+        <datalist>
+            <option>name=name</option>
+            <option>//input[@name='name']</option>
+            <option>//div[@id='content']/form/table/tbody/tr/td[2]/input</option>
+            <option>//td[2]/input</option>
+        </datalist>
+    </td>
+    <td>Testowy dron0x1</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=model
+        <datalist>
+            <option>name=model</option>
+            <option>//input[@name='model']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[3]/td[2]/input</option>
+            <option>//tr[3]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=model
+        <datalist>
+            <option>name=model</option>
+            <option>//input[@name='model']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[3]/td[2]/input</option>
+            <option>//tr[3]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>model_nazwa</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='content']/form/table/tbody/tr[6]/td[2]/label
+        <datalist>
+            <option>//div[@id='content']/form/table/tbody/tr[6]/td[2]/label</option>
+            <option>//label</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[7]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[7]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a[2]/img
+        <datalist>
+            <option>//div[@id='left_menu']/a[2]/img</option>
+            <option>//a[2]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Tworzenie trasy</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/routes
+        <datalist>
+            <option>http://engine/routes</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a/img
+        <datalist>
+            <option>//div[@id='left_menu']/a/img</option>
+            <option>//img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=name
+        <datalist>
+            <option>name=name</option>
+            <option>//input[@name='name']</option>
+            <option>//table[@id='route_details']/tbody/tr/td[2]/input</option>
+            <option>//td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=name
+        <datalist>
+            <option>name=name</option>
+            <option>//input[@name='name']</option>
+            <option>//table[@id='route_details']/tbody/tr/td[2]/input</option>
+            <option>//td[2]/input</option>
+        </datalist>
+    </td>
+    <td>Trasa testowa01</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//table[@id='route_details']/tbody/tr[2]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='map']/div/div/div/div[3]/div
+        <datalist>
+            <option>//div[@id='map']/div/div/div/div[3]/div</option>
+            <option>//div/div[3]/div</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='map']/div/div/div/div[3]/div
+        <datalist>
+            <option>//div[@id='map']/div/div/div/div[3]/div</option>
+            <option>//div/div[3]/div</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='map']/div/div/div/div[3]/div
+        <datalist>
+            <option>//div[@id='map']/div/div/div/div[3]/div</option>
+            <option>//div/div[3]/div</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='map']/div/div/div/div[3]/div
+        <datalist>
+            <option>//div[@id='map']/div/div/div/div[3]/div</option>
+            <option>//div/div[3]/div</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='map']/div/div/div/div[3]/div
+        <datalist>
+            <option>//div[@id='map']/div/div/div/div[3]/div</option>
+            <option>//div/div[3]/div</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//table[@id='route_details']/tbody/tr[2]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td>opis trasy testowej</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a[2]/img
+        <datalist>
+            <option>//div[@id='left_menu']/a[2]/img</option>
+            <option>//a[2]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Tworzenie harmonogramu</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/drones
+        <datalist>
+            <option>http://engine/drones</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//img[@title='Rozkład']
+        <datalist>
+            <option>//img[@title='Rozkład']</option>
+            <option>//div[@id='content']/table/tbody/tr/td[5]/a[3]/img</option>
+            <option>//a[3]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a[2]/img
+        <datalist>
+            <option>//div[@id='left_menu']/a[2]/img</option>
+            <option>//a[2]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=select2-route_id_id-container
+        <datalist>
+            <option>id=select2-route_id_id-container</option>
+            <option>//span[@id='select2-route_id_id-container']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[2]/td[2]/span/span/span/span</option>
+            <option>//span/span/span/span</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=day_of_week
+        <datalist>
+            <option>name=day_of_week</option>
+            <option>//input[@name='day_of_week']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[3]/td[2]/input</option>
+            <option>//tr[3]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=day_of_week
+        <datalist>
+            <option>name=day_of_week</option>
+            <option>//input[@name='day_of_week']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[3]/td[2]/input</option>
+            <option>//tr[3]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>4</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=month
+        <datalist>
+            <option>name=month</option>
+            <option>//input[@name='month']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[4]/td[2]/input</option>
+            <option>//tr[4]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=month
+        <datalist>
+            <option>name=month</option>
+            <option>//input[@name='month']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[4]/td[2]/input</option>
+            <option>//tr[4]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>4</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=day
+        <datalist>
+            <option>name=day</option>
+            <option>//input[@name='day']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[5]/td[2]/input</option>
+            <option>//tr[5]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=min
+        <datalist>
+            <option>name=min</option>
+            <option>//input[@name='min']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[7]/td[2]/input</option>
+            <option>//tr[7]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=min
+        <datalist>
+            <option>name=min</option>
+            <option>//input[@name='min']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[7]/td[2]/input</option>
+            <option>//tr[7]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>5</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=hour
+        <datalist>
+            <option>name=hour</option>
+            <option>//input[@name='hour']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[6]/td[2]/input</option>
+            <option>//tr[6]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=hour
+        <datalist>
+            <option>name=hour</option>
+            <option>//input[@name='hour']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[6]/td[2]/input</option>
+            <option>//tr[6]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[8]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>//textarea[@name='description']
+        <datalist>
+            <option>//textarea[@name='description']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[8]/td[2]/textarea</option>
+            <option>//textarea</option>
+        </datalist>
+    </td>
+    <td>ooo www</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a[2]/img
+        <datalist>
+            <option>//div[@id='left_menu']/a[2]/img</option>
+            <option>//a[2]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a/img
+        <datalist>
+            <option>//div[@id='left_menu']/a/img</option>
+            <option>//img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='content']/table/tbody/tr/td[3]
+        <datalist>
+            <option>//div[@id='content']/table/tbody/tr/td[3]</option>
+            <option>//td[3]</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Edycja harmonogramu</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/drones
+        <datalist>
+            <option>http://engine/drones</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//img[@title='Rozkład']
+        <datalist>
+            <option>//img[@title='Rozkład']</option>
+            <option>//div[@id='content']/table/tbody/tr/td[5]/a[3]/img</option>
+            <option>//a[3]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='content']/table/tbody/tr/td[2]
+        <datalist>
+            <option>//div[@id='content']/table/tbody/tr/td[2]</option>
+            <option>//td[2]</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=day
+        <datalist>
+            <option>name=day</option>
+            <option>//input[@name='day']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[5]/td[2]/input</option>
+            <option>//tr[5]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=day
+        <datalist>
+            <option>name=day</option>
+            <option>//input[@name='day']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[5]/td[2]/input</option>
+            <option>//tr[5]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=month
+        <datalist>
+            <option>name=month</option>
+            <option>//input[@name='month']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[4]/td[2]/input</option>
+            <option>//tr[4]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=month
+        <datalist>
+            <option>name=month</option>
+            <option>//input[@name='month']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[4]/td[2]/input</option>
+            <option>//tr[4]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>name=day_of_week
+        <datalist>
+            <option>name=day_of_week</option>
+            <option>//input[@name='day_of_week']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[3]/td[2]/input</option>
+            <option>//tr[3]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>type</td>
+    <td>name=day_of_week
+        <datalist>
+            <option>name=day_of_week</option>
+            <option>//input[@name='day_of_week']</option>
+            <option>//div[@id='content']/form/table/tbody/tr[3]/td[2]/input</option>
+            <option>//tr[3]/td[2]/input</option>
+        </datalist>
+    </td>
+    <td>12</td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a[2]/img
+        <datalist>
+            <option>//div[@id='left_menu']/a[2]/img</option>
+            <option>//a[2]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//div[@id='left_menu']/a/img
+        <datalist>
+            <option>//div[@id='left_menu']/a/img</option>
+            <option>//img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Usuwanie harmonogramu</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/drones
+        <datalist>
+            <option>http://engine/drones</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//img[@title='Rozkład']
+        <datalist>
+            <option>//img[@title='Rozkład']</option>
+            <option>//div[@id='content']/table/tbody/tr/td[5]/a[3]/img</option>
+            <option>//a[3]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//img[@title='Usuń']
+        <datalist>
+            <option>//img[@title='Usuń']</option>
+            <option>//div[@id='content']/table/tbody/tr/td[8]/a/img</option>
+            <option>//td[8]/a/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Usuwanie trasy</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/routes
+        <datalist>
+            <option>http://engine/routes</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//img[@title='Usuń']
+        <datalist>
+            <option>//img[@title='Usuń']</option>
+            <option>//div[@id='content']/table/tbody/tr/td[3]/a/img</option>
+            <option>//td[3]/a/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Usuwanie drona</td></tr>
+</thead>
+<tbody>
+<tr>
+    <td>open</td>
+    <td>http://engine/drones
+        <datalist>
+            <option>http://engine/drones</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>link=Drony
+        <datalist>
+            <option>link=Drony</option>
+            <option>//a[contains(text(),'Drony')]</option>
+            <option>//nav[@id='main_nav']/div/div/ul/li/a</option>
+            <option>//a[contains(@href, '/drones')]</option>
+            <option>//li/a</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>//img[@title='Usuń']
+        <datalist>
+            <option>//img[@title='Usuń']</option>
+            <option>//div[@id='content']/table/tbody/tr/td[5]/a[4]/img</option>
+            <option>//a[4]/img</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+<tr>
+    <td>click</td>
+    <td>id=close_alert
+        <datalist>
+            <option>id=close_alert</option>
+            <option>//button[@id='close_alert']</option>
+            <option>//div[@id='alert_box']/button</option>
+            <option>//div[4]/button</option>
+        </datalist>
+    </td>
+    <td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

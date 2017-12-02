@@ -113,7 +113,7 @@ class Drones extends Auth_Controller
         $this->table->add_action_delete('/drones/schedule_delete/'.$id);
 
         $this->add_menu_return('drones');
-        $this->add_menu_new('/timetable/details/'.$id);
+        $this->add_menu_new('/drones/schedule_details/'.$id);
         $this->add_header($drone->name);
         $this->add_description(_('Harmonogram lotów'));
 
@@ -174,7 +174,7 @@ class Drones extends Auth_Controller
         $scheduler = Schedule_model::where('drone_id', '=', $id)->find($scheduler_id);
         $scheduler->delete();
         alert('Usunięto harmonogram', NOTICE);
-        $this->redirect($this->class.'/index/'.$id);
+        $this->redirect($this->class.'/schedule/'.$id);
     }
 
 }
