@@ -66,7 +66,6 @@
 
         $('.save').on('click', function(e) {
             e.preventDefault();
-
             var points = JSON.stringify(poly.getPath().getArray());
             if(points.length > 0) {
                 $("input[name*='route']").val(points);

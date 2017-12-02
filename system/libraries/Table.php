@@ -63,14 +63,14 @@ class CI_Table
     public $function = null;
 
     /**
-     * Set the template from the table config file if it exists
+     * Ustawia szablon z pliku konfiguracyjnego tabel jesli istnieje
      *
      * @param    array $config (default: array())
      * @return    void
      */
-    public function __construct($config = array())
+    public function __construct($config = [])
     {
-        // initialize config
+        // inicjalizacja configu
         foreach ($config as $key => $val) {
             $this->template[$key] = $val;
         }
@@ -78,138 +78,8 @@ class CI_Table
         log_message('info', 'Table Class Initialized');
     }
 
-    // --------------------------------------------------------------------
-
     /**
-     * Set the template
-     *
-     * @param    array $template
-     * @return    bool
-     */
-    public function set_template($template)
-    {
-        if (!is_array($template)) {
-            return FALSE;
-        }
-
-        $this->template = $template;
-        return TRUE;
-    }
-
-    //Dodawanie kolumn
-    public function add_column($column_name, $db_field, $name_map = null)
-    {
-        if($name_map === true) {
-            $name_map = [0 => _('nie'), 1 => _('tak')];
-        }
-        $this->columns[$db_field] = ['column_name' => $column_name, 'name_map' => $name_map];
-        return $this;
-    }
-
-    public function add_click($url = null)
-    {
-
-        if (empty($url)) {
-            $url = get_path() . '/details';
-        }
-        $this->url = $url;
-    }
-
-    public function add_action_delete($url = null)
-    {
-        if(empty($url)) {
-            $url = get_path() . '/delete';
-        }
-        $this->add_action($url, '/assets/icons/trash.png', _('Usuń'));
-    }
-
-    public function add_action($url, $icon, $name = null, $new_window = null, $param = null, $style = null)
-    {
-        if (empty($param)) {
-            $param = 'id';
-        }
-
-        $this->actions [] = [
-            'name' => $name,
-            'url' => $url,
-            'icon' => $icon,
-            'param' => $param,
-            'style' => "text-align:center;" . $style,
-            'new_window' => $new_window
-        ];
-
-    }
-
-    /**
-     * Set columns. Takes a one-dimensional array as input and creates
-     * a multi-dimensional array with a depth equal to the number of
-     * columns. This allows a single array with many elements to be
-     * displayed in a table that has a fixed column count.
-     *
-     * @param    array $array
-     * @param    int $col_limit
-     * @return    array
-     */
-    public function make_columns($array = array(), $col_limit = 0)
-    {
-        if (!is_array($array) OR count($array) === 0 OR !is_int($col_limit)) {
-            return FALSE;
-        }
-
-        // Turn off the auto-heading feature since it's doubtful we
-        // will want headings from a one-dimensional array
-        $this->auto_heading = FALSE;
-
-        if ($col_limit === 0) {
-            return $array;
-        }
-
-        $new = array();
-        do {
-            $temp = array_splice($array, 0, $col_limit);
-
-            if (count($temp) < $col_limit) {
-                for ($i = count($temp); $i < $col_limit; $i++) {
-                    $temp[] = '&nbsp;';
-                }
-            }
-
-            $new[] = $temp;
-        } while (count($array) > 0);
-
-        return $new;
-    }
-
-    /**
-     * Set "empty" cells
-     *
-     * Can be passed as an array or discreet params
-     *
-     * @param    mixed $value
-     * @return    CI_Table
-     */
-    public function set_empty($value)
-    {
-        $this->empty_cells = $value;
-        return $this;
-    }
-
-    /**
-     * Add a table row
-     *
-     * Can be passed as an array or discreet params
-     *
-     * @param    mixed
-     * @return    CI_Table
-     */
-    public function add_row($args = array())
-    {
-        $this->rows[] = $this->_prep_args(func_get_args());
-        return $this;
-    }
-
-    /**
-     * Prep Args
+     * Przygotowanie argumentów
      *
      * Ensures a standard associative array format for all cell data
      *
@@ -245,12 +115,153 @@ class CI_Table
     }
 
     /**
-     * Generate the table
+     * Ustawienie szablonu
+     *
+     * @param    array $template
+     * @return    bool
+     */
+    public function set_template($template)
+    {
+        if (!is_array($template)) {
+            return FALSE;
+        }
+
+        $this->template = $template;
+        return TRUE;
+    }
+
+    /**
+     * Dodanie dowolnej akcji
+     */
+    public function add_action($url, $icon, $name = null, $new_window = null, $param = null, $style = null)
+    {
+        if (empty($param)) {
+            $param = 'id';
+        }
+
+        $this->actions [] = [
+            'name' => $name,
+            'url' => $url,
+            'icon' => $icon,
+            'param' => $param,
+            'style' => "text-align:center;" . $style,
+            'new_window' => $new_window
+        ];
+
+    }
+
+    /**
+     * Obsługa klinięcia rekordu
+     */
+    public function add_click($url = null)
+    {
+
+        if (empty($url)) {
+            $url = get_path() . '/details';
+        }
+        $this->url = $url;
+    }
+
+    /**
+     * Dodanie akcji usuwania
+     */
+    public function add_action_delete($url = null)
+    {
+        if(empty($url)) {
+            $url = get_path() . '/delete';
+        }
+        $this->add_action($url, '/assets/icons/trash.png', _('Usuń'));
+    }
+
+    /**
+     * Stworzenie kolumn
+     *
+     * @param    array $array
+     * @param    int $col_limit
+     * @return    array
+     */
+    public function make_columns($array = [], $col_limit = 0)
+    {
+        if (!is_array($array) OR count($array) === 0 OR !is_int($col_limit)) {
+            return FALSE;
+        }
+
+        // Turn off the auto-heading feature since it's doubtful we
+        // will want headings from a one-dimensional array
+        $this->auto_heading = FALSE;
+
+        if ($col_limit === 0) {
+            return $array;
+        }
+
+        $new = array();
+        do {
+            $temp = array_splice($array, 0, $col_limit);
+
+            if (count($temp) < $col_limit) {
+                for ($i = count($temp); $i < $col_limit; $i++) {
+                    $temp[] = '&nbsp;';
+                }
+            }
+
+            $new[] = $temp;
+        } while (count($array) > 0);
+
+        return $new;
+    }
+
+    /**
+     * Ustawienie pustych komórek
+     *
+     * Can be passed as an array or discreet params
+     *
+     * @param    mixed $value
+     * @return    CI_Table
+     */
+    public function set_empty($value)
+    {
+        $this->empty_cells = $value;
+        return $this;
+    }
+
+    /**
+     * Dodanie kolejnego wiersza
+     *
+     * Can be passed as an array or discreet params
+     *
+     * @param    mixed
+     * @return    CI_Table
+     */
+    public function add_row($args = [])
+    {
+        $this->rows[] = $this->_prep_args(func_get_args());
+        return $this;
+    }
+
+    /**
+     * Dodanie nowej kolumny
+     *
+     * @param    string $column_name
+     * @param    string $db_field
+     * @param    array $name_map
+     * @return    array
+     */
+    public function add_column($column_name, $db_field, $name_map = null)
+    {
+        if($name_map === true) {
+            $name_map = [0 => _('nie'), 1 => _('tak')];
+        }
+        $this->columns[$db_field] = ['column_name' => $column_name, 'name_map' => $name_map];
+        return $this;
+    }
+
+    /**
+     * Generowanie tabeli
      *
      * @param    mixed $table_data
      * @return    string
      */
-    public function generate($table_data = NULL)
+    public function generate($table_data = null)
     {
         // The table data can optionally be passed to this function
         // either as a database result object or an array
@@ -364,10 +375,9 @@ class CI_Table
         return $out;
     }
 
-    // --------------------------------------------------------------------
-
     /**
-     * Clears the table arrays.  Useful if multiple tables are being generated
+     * Czyszczenie zawartości tabeli
+     * Useful if multiple tables are being generated
      *
      * @return    CI_Table
      */
@@ -379,10 +389,8 @@ class CI_Table
         return $this;
     }
 
-    // --------------------------------------------------------------------
-
     /**
-     * Compile Template
+     * Kompilowanie szablonu
      *
      * @return    void
      */
@@ -401,10 +409,8 @@ class CI_Table
         }
     }
 
-    // --------------------------------------------------------------------
-
     /**
-     * Default Template
+     * Domyślny szablon
      *
      * @return    array
      */

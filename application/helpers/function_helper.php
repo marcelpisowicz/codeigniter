@@ -39,7 +39,9 @@ if (!function_exists('arr_form')) {
 
     function arr_form($array)
     {
-        return array_merge([0 => '-- Wybierz --'], $array);
+        $array[''] = '--'._('Wybierz').'--';
+        asort($array);
+        return $array;
     }
 }
 

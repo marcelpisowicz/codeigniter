@@ -149,9 +149,9 @@ class MY_Controller extends CI_Controller
     public function add_menu_return($path = null)
     {
         if(empty($path)) {
-            $path = '/'.$this->class;
+            $path = $this->class;
         }
-        $this->add_menu($path, '/assets/icons/return.png', _('Powrót'));
+        $this->add_menu('/'.$path, '/assets/icons/return.png', _('Powrót'));
     }
 
     public function model($model, $nazwa = 'model') {

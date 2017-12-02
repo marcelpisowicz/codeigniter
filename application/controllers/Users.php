@@ -28,6 +28,7 @@ class Users extends Auth_Controller
 
         $this->model($user);
         $this->data['id'] = $id;
+        $this->data['languages'] = ['pl' => _('Polski')];
 
         $this->add_menu_return();
         $this->add_menu_save();

@@ -15,7 +15,7 @@ class Drones extends Auth_Controller
 //        $this->table->add_action('/home/location', '/assets/icons/location.png');
         $this->table->add_action('/drones/streaming', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
         $this->table->add_action('/drones/calendar', '/assets/icons/calendar.png', 'Kalendarz');
-        $this->table->add_action('/timetable/index', '/assets/icons/document.png', 'Rozkład');
+        $this->table->add_action('/drones/schedule', '/assets/icons/document.png', 'Rozkład');
         $this->table->add_action_delete();
         $this->table->add_click();
 
@@ -95,6 +95,86 @@ class Drones extends Auth_Controller
         $this->data['id'] = $id;
 
         $this->render('drones/calendar_view');
+    }
+
+    public function schedule($id)
+    {
+        $drone = Drone_model::find($id);
+        $scheduler = Schedule_model::get_schedules($id);
+
+        $this->table->add_column(_('Użytkownik'), 'username');
+        $this->table->add_column(_('Trasa'), 'routename');
+        $this->table->add_column(_('Dzień tygodnia'), 'day_of_week');
+        $this->table->add_column(_('Miesiąc'), 'month');
+        $this->table->add_column(_('Dzień'), 'day');
+        $this->table->add_column(_('Godzina'), 'hour');
+        $this->table->add_column(_('Minuta'), 'min');
+        $this->table->add_click('/drones/schedule_details/'.$id);
+        $this->table->add_action_delete('/drones/schedule_delete/'.$id);
+
+        $this->add_menu_return('drones');
+        $this->add_menu_new('/timetable/details/'.$id);
+        $this->add_header($drone->name);
+        $this->add_description(_('Harmonogram lotów'));
+
+        $this->data['table'] = $this->table->generate($scheduler);
+
+        $this->selected_menu = 'drones';
+        $this->render('drones/schedule_view');
+    }
+
+    public function schedule_details($id)
+    {
+        $scheduler_id = $this->uri->segment('4');
+        $scheduler = Schedule_model::findOrNew($scheduler_id);
+        $drone = Drone_model::find($id);
+
+        $routes = Route_model::all()->toArray();
+        $route_select = [];
+        foreach($routes as $route) {
+            $route_select[$route['id']] = $route['name'];
+        }
+
+        $this->data['route_select'] = arr_form($route_select);
+
+        $this->model($scheduler);
+        $this->model($drone, 'drone');
+
+        $this->add_header($drone->name);
+        $this->add_description(_('Szczegóły lotu'));
+
+        $this->add_menu_return($this->class.'/schedule/'.$id);
+        $this->add_menu_save();
+        $this->add_menu_delete($id.'/'.$scheduler_id);
+
+        $this->selected_menu = 'drones';
+        $this->render('drones/schedule_details_view');
+    }
+
+    public function schedule_save()
+    {
+        $post = array_filter($this->input->post());
+        $timetable_id = $post['id'] ?? null;
+        $timetable = Schedule_model::findOrNew($timetable_id);
+        $user_id = $this->session->get_userdata()['user_id'];
+        $post['user_id'] = $user_id;
+        $drone_id = $post['drone_id'];
+
+        $timetable->fill($post);
+
+        $timetable->save();
+        $timetable_id = $timetable->getKey();
+        alert('Zapisano informacje na temat harmonogramu', SUCCESS);
+        $this->redirect($this->class.'/schedule_details/'.$drone_id.'/'.$timetable_id);
+    }
+
+    public function schedule_delete(int $id)
+    {
+        $scheduler_id = $this->uri->segment('4');
+        $scheduler = Schedule_model::where('drone_id', '=', $id)->find($scheduler_id);
+        $scheduler->delete();
+        alert('Usunięto harmonogram', NOTICE);
+        $this->redirect($this->class.'/index/'.$id);
     }
 
 }

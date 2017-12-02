@@ -51,6 +51,9 @@ class Routes extends Auth_Controller
         } else {
             $this->data['center_lat'] = 51.110;
             $this->data['center_lng'] = 17.055;
+            if(!empty($id)) {
+                alert('Brak zdefiniowanej trasy', WARNING);
+            }
         }
 
         $this->add_menu_return();
@@ -62,7 +65,7 @@ class Routes extends Auth_Controller
 
     public function save()
     {
-        $post = $this->input->post();
+        $post = array_filter($this->input->post());
 
         $route_id = (int)$post['id'];
         $user_id = $this->session->get_userdata()['user_id'];

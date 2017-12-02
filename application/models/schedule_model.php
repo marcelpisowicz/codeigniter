@@ -7,6 +7,7 @@ class Schedule_model extends Eloquent {
 
     public $timestamps = true;
     protected $table = "schedule";
+    protected $fillable = ['route_id','drone_id','min','hour','day','month','day_of_week','description','user_id'];
 
     public static function get_schedules(int $drone_id)
     {

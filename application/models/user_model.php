@@ -6,10 +6,10 @@ class User_model extends Eloquent {
     public $timestamps = false;
     protected $table = "users";
 
-    public function save_user($post) {
+    public function save_user(array $post) {
 
         if(empty($post)) {
-            return false;
+            return null;
         }
 
         $password = $post['password'];

@@ -261,14 +261,7 @@ class Ion_auth_model extends CI_Model
         return hash_password($password, $salt);
     }
 
-    /**
-     * This function takes a password and validates it
-     * against an entry in the users table.
-     *
-     * @return void
-     * @author Mathew
-     **/
-    public function hash_password_db($id, $password, $use_sha1_override = false)
+    public function hash_password_db($id, $password)
     {
         if (empty($id) || empty($password)) {
             return false;
@@ -279,7 +272,6 @@ class Ion_auth_model extends CI_Model
         $query = $this->db->select('password, salt')
             ->where('id', $id)
             ->limit(1)
-            ->order_by('id', 'desc')
             ->get($this->tables['users']);
 
         $user = $query->row();
@@ -802,17 +794,12 @@ class Ion_auth_model extends CI_Model
         if ($this->identity_check($identity)) {
             $this->set_error('account_creation_duplicate_identity');
             return false;
-        } elseif (!$this->config->item('default_group', 'ion_auth') && empty($groups)) {
-            $this->set_error('account_creation_missing_default_group');
-            return false;
         }
 
-        // IP Address
         $ip_address = $this->_prepare_ip($this->input->ip_address());
         $salt = random_salt();
         $password = hash_password($password, $salt);
 
-        // Users table.
         $user_data = [
             $this->identity_column => $identity,
             'username' => $identity,
@@ -831,26 +818,8 @@ class Ion_auth_model extends CI_Model
         // and merge the set user data and the additional data
 
         $this->trigger_events('extra_set');
-
         $this->db->insert($this->tables['users'], $user_data);
-
         $id = $this->db->insert_id($this->tables['users'] . '_id_seq');
-
-        // add in groups array if it doesn't exists and stop adding into default group if default group ids are set
-//		if( isset($default_group->id) && empty($groups) )
-//		{
-//			$groups[] = $default_group->id;
-//		}
-//
-//		if (!empty($groups))
-//		{
-//			// add to groups
-//			foreach ($groups as $group)
-//			{
-//				$this->add_to_group($group, $id);
-//			}
-//		}
-
         $this->trigger_events('post_register');
 
         return (isset($id)) ? $id : false;
@@ -903,9 +872,7 @@ class Ion_auth_model extends CI_Model
                 }
 
                 $this->set_session($user);
-
                 $this->update_last_login($user->id);
-
                 $this->clear_login_attempts($identity);
 
                 if ($remember && $this->config->item('remember_users', 'ion_auth')) {

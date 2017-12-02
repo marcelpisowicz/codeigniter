@@ -24,7 +24,7 @@
     </tr>
     <tr>
         <td><?= _('Język') ?></td>
-        <td><?= form_dropdown('lang', arr_form(['pl' => _('Polski')]), $model['lang']); ?></td>
+        <td><?= form_dropdown('lang', arr_form($languages), $model['lang']); ?></td>
     </tr>
     <tr>
         <td><?= _('Aktywny')?></td>
