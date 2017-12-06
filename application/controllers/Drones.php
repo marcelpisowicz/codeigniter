@@ -8,14 +8,16 @@ class Drones extends Auth_Controller
     {
         $drones = Drone_model::all();
         $this->table->add_column(_('Nazwa'), 'name');
+        $this->table->add_column(_('Model'), 'model');
         $this->table->add_column(_('Numer seryjny'), 'serial_number');
         $this->table->add_column(_('Typ urządzenia'), 'type', Drone_model::getTypes());
-        $this->table->add_column(_('Aktywny'), 'active', true);
-//        $this->table->add_action('/home/gps', '/assets/icons/gps.png');
-//        $this->table->add_action('/home/location', '/assets/icons/location.png');
+//        $this->table->add_column(_('Aktywny'), 'active', true);
         $this->table->add_action('/drones/streaming', '/assets/icons/fullscreen.png', 'Streaming', [900, 450]);
         $this->table->add_action('/drones/calendar', '/assets/icons/calendar.png', 'Kalendarz');
         $this->table->add_action('/drones/schedule', '/assets/icons/document.png', 'Rozkład');
+        $this->table->add_action('#', '/assets/icons/location.png', 'Lokalizacja');
+        $this->table->add_action('#', '/assets/icons/send.png', 'Wydaj polecenie');
+        $this->table->add_action('#', '/assets/icons/stat.png', 'Informacje o urządzeniu');
         $this->table->add_action_delete();
         $this->table->add_click();
 
@@ -89,10 +91,14 @@ class Drones extends Auth_Controller
     {
         $this->load->library('MyCalendar');
         $this->add_menu_return();
+        $drone = Drone_model::find($id);
 
         $phpCalendar = new MyCalendar();
         $this->data['calendar'] = $phpCalendar->getCalendarHTML();
         $this->data['id'] = $id;
+
+        $this->add_header($drone->name);
+        $this->add_description(_('Kalendarz lotów'));
 
         $this->render('drones/calendar_view');
     }
